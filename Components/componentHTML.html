@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="componentCSS.css">
+</head>
+
+<button class="trigger">
+  +
+</button>
+
+<div class="blank-space">
+</div>
+
+
+<div class="show-added" contenteditable="false"> </div>
+
+<button class="edit-text" onclick="enableEditing()" style="display:none">Edit</button>
+<button class="confirm-changes" onclick="submitChanges()" style="display:none">Submit</button>
+
+<div class="modal">
+
+  <div class="modal-contents">
+
+    <button class="add-image">Image
+    </button>
+    <button class="add-file" onclick="fileAdd()">File
+    </button>
+
+    <button class="add-text">Text</button>
+
+    <button class="add-submission">Submission
+    </button>
+
+    <input type="text" id="text-input" style="display:none"> </input>
+    <input type="file" id="selected-file" style="display:none"> </input>
+
+    <button class="submit-text" style="display:none">Submit</button>
+
+    <span class="close-button">x</span>
+
+  </div>
+
+</div>
+
+</html>
+
+<script defer>
+  const modal = document.querySelector(".modal");
+  const trigger = document.querySelector(".trigger");
+  const closeButton = document.querySelector(".close-button");
+  const textButton = document.querySelector(".add-text");
+  const inputText = document.getElementById("text-input");
+  const submitText = document.querySelector(".submit-text");
+  const inputImg = document.querySelector(".add-image");
+  const inputSubmission = document.querySelector(".add-submission");
+  const showAdd = document.querySelector(".show-added");
+  const editWriting = document.querySelector(".edit-text");
+  const submitTextChanges = document.querySelector(".confirm-changes");
+  var selectFile = document.getElementById("selected-file");
+  let userInput;
+
+
+  function toggleModal() {
+    modal.classList.toggle("show-modal");
+    inputText.style.display = "none";
+    submitText.style.display = "none";
+    inputText.value = inputText.defaultValue;
+    selectFile.style.display = "none";
+  }
+
+  function windowOnClick(event) {
+    if (event.target === modal) {
+      toggleModal();
+    }
+  }
+
+  //Add an image -- NOT FINISHED YET
+  function imgAdd(event) {
+    inputText.style.display = "none";
+    submitText.style.display = "none";
+    inputText.value = inputText.defaultValue;
+    selectFile.style.display = "none";
+  }
+
+  //Pressing the "Add File" button allows users to select a file that is uploaded to the database. It also closes and clears the "Add Text" box if it was opened prior.
+  function fileAdd(event) {
+    inputText.style.display = "none";
+    submitText.style.display = "none";
+    inputText.value = inputText.defaultValue;
+
+    selectFile.style.display = "block";
+
+    // var file = inputFile.files[0];
+
+    // var formData = new FormData();
+    // formData.append("file", file);
+
+    // var upload = new XMLHttpRequest();
+
+    // upload.open("POST", "/upload");
+
+    //the "/upload" String is the placeholder that is where the location of the database server goes. IE, this is what's replaced with the info to put it into the server.
+    //I also haven't had a lot of time to look into the exact thing, so I could be way off.
+
+    // upload.send(formData);
+  }
+
+  //This is what makes the text box and submit button visible.
+  function textAdd(event) {
+    inputText.style.display = "block";
+    submitText.style.display = "block";
+    selectFile.style.display = "none";
+  }
+
+  //This is the start for submitting text entered by the user. It's what determines what pops up after the text button is clicked.
+  function textSubmit(event) {
+    userInput = document.getElementById("text-input").value;
+    showAdd.innerHTML = userInput;
+    showAdd.style.border = "thin solid black";
+    toggleModal();
+    editWriting.style.display = "block";
+    submitTextChanges.style.display = "block";
+
+  }
+
+  //This is the function that lets the user edit text sent. Not sure if it directly ties into database stuff but it's here.
+  function enableEditing(event) {
+    var editable = showAdd;
+    editable.contentEditable = true;
+    editable.focus();
+  }
+
+  //This is the submit button for said changes. Again, figured it'd be better for me to point it out.
+  function submitChanges() {
+    showAdd.contentEditable = false;
+  }
+
+
+  //This'll be used to submit an assignment or whatever it may be -- NOT FINISHED
+  function submissionAdd(event) {
+    inputText.style.display = "none";
+    submitText.style.display = "none";
+    inputText.value = inputText.defaultValue;
+    selectFile.style.display = "none";
+  }
+
+  trigger.addEventListener("click", toggleModal);
+  closeButton.addEventListener("click", toggleModal);
+  window.addEventListener("click", windowOnClick);
+  inputImg.addEventListener("click", imgAdd);
+  textButton.addEventListener("click", textAdd);
+  submitText.addEventListener("click", textSubmit);
+  inputSubmission.addEventListener("click", submissionAdd);
+</script>

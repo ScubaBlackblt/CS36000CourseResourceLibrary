@@ -1,0 +1,130 @@
+
+.modal {
+    position: absolute;
+    left: 28%;
+    top: 30%;
+    width: 700px;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    vertical-align: middle;
+    padding: 100px 100px 100px 100px;
+  }
+  
+  .trigger {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+  }
+  
+  .close-button:hover {
+    background-color: darkgray;
+  }
+  
+  .show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+  }
+  
+  .add-image {
+    margin-left: 50px;
+    margin-right: 50px;
+    background-image: url('https://cdn.onlinewebfonts.com/svg/img_520029.png');
+    background-size: 85%;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    border-radius: 0.25rem;
+    line-height: 180px;
+  }
+  
+  .add-image:hover {
+    background-color: powderBlue;
+  }
+  
+  .add-file {
+    margin-right: 50px;
+    background-image: url('https://cdn.onlinewebfonts.com/svg/img_520494.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    border-radius: 0.25rem;
+    width: 100px;
+    height: 100px;
+    line-height: 180px;
+  }
+  
+  .add-file:hover {
+    background-color: powderBlue;
+  
+  }
+  
+  .add-text {
+    margin-right: 50px;
+    background-image: url('https://cdn3.iconfinder.com/data/icons/symbol-black-common-2/32/text-add-512.png');
+    background-size: 85%;
+    background-repeat: no-repeat;
+    border-radius: 0.25rem;
+    width: 100px;
+    height: 100px;
+    line-height: 180px;
+  }
+  
+  #text-input {
+    margin-left: 50px;
+    margin-top: 10px;
+  }
+  
+  .submit-text {
+    margin-left: 50px;
+    background-color: gray;
+    border-radius: 0.25rem;
+    width: 100px;
+    height: 50;
+  }
+  
+  .add-text:hover {
+    background-color: powderBlue;
+  }
+  
+  .add-submission {
+    margin-right: 50px;
+    background-image: url('https://csci1210.com/images/assignment.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    border-radius: 0.25rem;
+    width: 100px;
+    height: 100px;
+    line-height: 180px;
+  }
+  
+  .add-submission:hover {
+    background-color: powderBlue;
+  }
+  
+  .blank-space {
+    height: 50px;
+  }
+  
+  .show-added {
+    height: 50px;
+    font-size: 20px;
+    width: 100px;
+  }
