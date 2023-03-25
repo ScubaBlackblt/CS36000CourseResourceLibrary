@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta charset="UTF-8">
+            <title>Course Reasouce Library</title>
+            <link rel="stylesheet" href="homePageCSS.css">
+          
+       </head>
+         
+           <body>
+<!----------------------------------------------->
+      <div class="top">
+        <div class="container">
+          <cite contenteditable="true">
+            Enter course name 
+            </cite>
+    </div>
+      </div>
+<!-------------------------------------------------------->
+
+     <!---- <div class="right">-->
+          
+      <!--side navigation-->
+      <div id="mySidenav" class="sidenav">
+
+      <!--links button to javaSprit-->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <!---where username and syllabus/add buttin needs to be-->
+        <!---syllabus page link ---->
+        <a class = "syllabus" ahref = "" >Syllabus</a>
+        <!--where the content/add subcatagory needs to go-->
+         <div class = "dropdown">
+        
+        
+       
+       </div>
+       <a class = "addStudent" ahref = "" >  Add Student</a>
+
+
+      </div>
+      <!--this is the button position, size-->
+      <span style="float:right;font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+      </span>
+      
+<!--sidenav js-->
+      <script>
+        function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+      </script>
+
+
+      <!--</div>-->
+      
+    <!--------------------------------------------------------------------->
+      
+      
+      <div class="main">
+          
+          <button class="trigger">
+      +
+      </button>
+      
+      <div class="modal">
+      
+        <div class="modal-contents">
+        
+        <button class="add-image">Image
+        </button>
+        <button class="add-file">File
+        </button>
+        
+        <button class="add-text">Text</button>
+        <input type="text" id ="text-input" style="display:none">
+        
+        <button class = "submit-text" style="display:none">Submit</button>
+        
+        <button class="add-submission">Submission
+        </button>
+        
+        <span class= "close-button">x</span>
+        
+        </div>
+        
+      </div>
+      <script>
+        const modal = document.querySelector(".modal");
+  const trigger = document.querySelector(".trigger");
+  const closeButton = document.querySelector(".close-button");
+  const textButton = document.querySelector(".add-text");
+  const inputText = document.getElementById("text-input");
+  const submitText = document.querySelector(".submit-text");
+  
+  function toggleModal() {
+  modal.classList.toggle("show-modal");
+  inputText.style.display="display:none";
+  submitText.style.display="display:none";
+  }
+  
+  function windowOnClick(event) {
+  if(event.target === modal) {
+  toggleModal();
+  }
+  }
+  
+  function textAdd(event) {
+  inputText.style.display = "block";
+  submitText.style.display="block";
+  
+  }
+  
+  trigger.addEventListener("click",toggleModal);
+  closeButton.addEventListener("click", toggleModal);
+  window.addEventListener("click", windowOnClick);
+  textButton.addEventListener("click", textAdd);
+  
+  
+      </script>
+      </div>
+
+
+     </body>
+
+    </html>
+   
+
