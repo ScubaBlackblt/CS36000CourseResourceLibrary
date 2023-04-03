@@ -8,11 +8,19 @@
     </body>
 
     <script>
-
+        
+        const triggerDiv = document.createElement('div');
+        triggerDiv.className = "trigger-div"; 
+        document.body.appendChild(triggerDiv);
+        
         const triggerButton = document.createElement('button');
         triggerButton.innerText = '+';
         triggerButton.className = "trigger";
-        document.body.appendChild(triggerButton);
+        triggerDiv.appendChild(triggerButton);
+        
+        const listDiv = document.createElement('div');
+        listDiv.className = "list-div";
+        document.body.appendChild(listDiv);
 
         const modal = document.createElement('div');
         modal.className = "modal";
@@ -123,11 +131,11 @@
             const list = document.createElement("li");
             list.style.listStyle = "none"
             list.appendChild(child);
-            if(document.body.hasChildNodes()) {
-                document.body.insertBefore(list, document.body.firstChild);
+            if(listDiv.hasChildNodes()) {
+                listDiv.insertBefore(list, listDiv.firstChild);
             }
             else {
-                document.body.appendChild(list);
+                listDiv.appendChild(list);
             }
         }
     </script>
