@@ -1,156 +1,134 @@
-<!DOCTYPE html>
-
 <html>
+    <head>
+        <link rel="stylesheet" href="componentCSS.css">
+    </head>
 
-<head>
-  <link rel="stylesheet" href="componentCSS.css">
-</head>
+    <body>
 
-<button class="trigger">
-  +
-</button>
+    </body>
 
-<div class="blank-space">
-</div>
+    <script>
+
+        const triggerButton = document.createElement('button');
+        triggerButton.innerText = '+';
+        triggerButton.className = "trigger";
+        document.body.appendChild(triggerButton);
+
+        const modal = document.createElement('div');
+        modal.className = "modal";
+        document.body.appendChild(modal);
+
+        const modalContents = document.createElement('div');
+        modalContents.className= "modal-contents";
+        modal.appendChild(modalContents);
+
+        const imageButton = document.createElement('button');
+        imageButton.innerText = 'Image';
+        imageButton.className = "add-image";
+        modalContents.appendChild(imageButton);
+
+        const fileButton = document.createElement('button');
+        fileButton.innerText = 'File';
+        fileButton.className = "add-file";
+        modalContents.appendChild(fileButton);
+
+        const textButton = document.createElement('button');
+        textButton.innerText = 'Text';
+        textButton.className = "add-text";
+        modalContents.appendChild(textButton);
+
+        const submissionButton = document.createElement('button');
+        submissionButton.innerText = 'Submission';
+        submissionButton.className = "add-submission";
+        modalContents.appendChild(submissionButton);
+
+        var userText = document.createElement("INPUT");
+        userText.setAttribute("type", "text");
+        userText.className = "text-input";
+        modalContents.appendChild(userText);
+
+        var selectedFile = document.createElement("INPUT");
+        selectedFile.setAttribute("type", "file");
+        selectedFile.className = "selected-file";
+        modalContents.appendChild(selectedFile);
+
+        const fileSubmitButton = document.createElement('button');
+        fileSubmitButton.innerText = 'Submit';
+        fileSubmitButton.className = "submit-file";
+        modalContents.appendChild(fileSubmitButton);
+
+        const textSubmitButton = document.createElement('button');
+        textSubmitButton.innerText = 'Submit';
+        textSubmitButton.className = "submit-text";
+        modalContents.appendChild(textSubmitButton);
+
+        const closeButton = document.createElement('span');
+        closeButton.innerText = 'x';
+        closeButton.className = "close-button";
+        modalContents.appendChild(closeButton);
 
 
-<div class="show-added" contenteditable="false"> </div>
+        triggerButton.addEventListener('click', () => {
+            modal.classList.toggle("show-modal");
+            selectedFile.style.visibility = 'hidden';
+            userText.value = userText.defaultValue;
+        })
 
-<button class="edit-text" onclick="enableEditing()" style="display:none">Edit</button>
-<button class="confirm-changes" onclick="submitChanges()" style="display:none">Submit</button>
+        window.addEventListener('click', () => {
+            if(event.target === modal) {
+                modal.classList.toggle("show-modal");
+            }
+        })
 
-<div class="modal">
+        imageButton.addEventListener('click', () => {
+            selectedFile.style.visibility = 'visible';
+            userText.style.visibility = 'hidden';
+            textSubmitButton.style.visibility = 'hidden';
 
-  <div class="modal-contents">
+            let pickedImg = selectedFile.src;
+        })
 
-    <button class="add-image">Image
-    </button>
-    <button class="add-file" onclick="fileAdd()">File
-    </button>
+        fileButton.addEventListener('click', () => {
+            selectedFile.style.visibility = 'visible';
+            fileSubmitButton.style.visibility = 'visible';
+            userText.style.visibility = 'hidden';
+            textSubmitButton.style.visibility = 'hidden';
+        })
 
-    <button class="add-text">Text</button>
+        fileSubmitButton.addEventListener('click', () => {
+            var file = selectedFile.files[0].name;
+            let fileNameInput = document.createTextNode(file);
 
-    <button class="add-submission">Submission
-    </button>
+            modal.classList.toggle("show-modal");
+            addToList(fileNameInput);
+        })
 
-    <input type="text" id="text-input" style="display:none"> </input>
-    <input type="file" id="selected-file" style="display:none"> </input>
+        textButton.addEventListener('click', () => {
+            selectedFile.style.visibility = 'hidden';
+            fileSubmitButton.style.visibility = 'hidden';
+            userText.style.visibility = 'visible';
+            textSubmitButton.style.visibility = 'visible';
 
-    <button class="submit-text" style="display:none">Submit</button>
+        })
 
-    <span class="close-button">x</span>
+        textSubmitButton.addEventListener('click', () => {
+            userInput = userText.value;
+            let insertTextInput = document.createTextNode(userInput);
 
-  </div>
+            modal.classList.toggle("show-modal");
+            addToList(insertTextInput);
+        })
 
-</div>
-
+        function addToList(child) {
+            const list = document.createElement("li");
+            list.style.listStyle = "none"
+            list.appendChild(child);
+            if(document.body.hasChildNodes()) {
+                document.body.insertBefore(list, document.body.firstChild);
+            }
+            else {
+                document.body.appendChild(list);
+            }
+        }
+    </script>
 </html>
-
-<script defer>
-  const modal = document.querySelector(".modal");
-  const trigger = document.querySelector(".trigger");
-  const closeButton = document.querySelector(".close-button");
-  const textButton = document.querySelector(".add-text");
-  const inputText = document.getElementById("text-input");
-  const submitText = document.querySelector(".submit-text");
-  const inputImg = document.querySelector(".add-image");
-  const inputSubmission = document.querySelector(".add-submission");
-  const showAdd = document.querySelector(".show-added");
-  const editWriting = document.querySelector(".edit-text");
-  const submitTextChanges = document.querySelector(".confirm-changes");
-  var selectFile = document.getElementById("selected-file");
-  let userInput;
-
-
-  function toggleModal() {
-    modal.classList.toggle("show-modal");
-    inputText.style.display = "none";
-    submitText.style.display = "none";
-    inputText.value = inputText.defaultValue;
-    selectFile.style.display = "none";
-  }
-
-  function windowOnClick(event) {
-    if (event.target === modal) {
-      toggleModal();
-    }
-  }
-
-  //Add an image -- NOT FINISHED YET
-  function imgAdd(event) {
-    inputText.style.display = "none";
-    submitText.style.display = "none";
-    inputText.value = inputText.defaultValue;
-    selectFile.style.display = "none";
-  }
-
-  //Pressing the "Add File" button allows users to select a file that is uploaded to the database. It also closes and clears the "Add Text" box if it was opened prior.
-  function fileAdd(event) {
-    inputText.style.display = "none";
-    submitText.style.display = "none";
-    inputText.value = inputText.defaultValue;
-
-    selectFile.style.display = "block";
-
-    // var file = inputFile.files[0];
-
-    // var formData = new FormData();
-    // formData.append("file", file);
-
-    // var upload = new XMLHttpRequest();
-
-    // upload.open("POST", "/upload");
-
-    //the "/upload" String is the placeholder that is where the location of the database server goes. IE, this is what's replaced with the info to put it into the server.
-    //I also haven't had a lot of time to look into the exact thing, so I could be way off.
-
-    // upload.send(formData);
-  }
-
-  //This is what makes the text box and submit button visible.
-  function textAdd(event) {
-    inputText.style.display = "block";
-    submitText.style.display = "block";
-    selectFile.style.display = "none";
-  }
-
-  //This is the start for submitting text entered by the user. It's what determines what pops up after the text button is clicked.
-  function textSubmit(event) {
-    userInput = document.getElementById("text-input").value;
-    showAdd.innerHTML = userInput;
-    showAdd.style.border = "thin solid black";
-    toggleModal();
-    editWriting.style.display = "block";
-    submitTextChanges.style.display = "block";
-
-  }
-
-  //This is the function that lets the user edit text sent. Not sure if it directly ties into database stuff but it's here.
-  function enableEditing(event) {
-    var editable = showAdd;
-    editable.contentEditable = true;
-    editable.focus();
-  }
-
-  //This is the submit button for said changes. Again, figured it'd be better for me to point it out.
-  function submitChanges() {
-    showAdd.contentEditable = false;
-  }
-
-
-  //This'll be used to submit an assignment or whatever it may be -- NOT FINISHED
-  function submissionAdd(event) {
-    inputText.style.display = "none";
-    submitText.style.display = "none";
-    inputText.value = inputText.defaultValue;
-    selectFile.style.display = "none";
-  }
-
-  trigger.addEventListener("click", toggleModal);
-  closeButton.addEventListener("click", toggleModal);
-  window.addEventListener("click", windowOnClick);
-  inputImg.addEventListener("click", imgAdd);
-  textButton.addEventListener("click", textAdd);
-  submitText.addEventListener("click", textSubmit);
-  inputSubmission.addEventListener("click", submissionAdd);
-</script>
