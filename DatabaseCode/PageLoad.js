@@ -12,16 +12,13 @@ async function getCourse(courseID){
             //console.log(result[0]);
             //ret = result[0];
             data(result[0]);
-            
-        }));
-        console.log("test");
-    //});   
+        })); 
 }
 
 
-async function getCategory(parentID){
+async function getCategory(categoryID){
   return new Promise(data =>
-    con.query("SELECT * FROM category WHERE parentID = ?",[parentID] , function (err, result, fields) {
+    con.query("SELECT * FROM category WHERE parentID = ?",[categoryID] , function (err, result, fields) {
         //console.log(result[0]);
         //ret = result[0];
         data(result[0]);
@@ -102,10 +99,10 @@ async function loadContent(modules){
   }
 }
 
-async function getCatgories(categoryTableID){
+async function getCatgories(parentID){
   return new Promise(data =>
     // Get submissions for the given table
-    con.query("SELECT category.* FROM category INNER JOIN categorytable ON category.categoryID = categorytable.categoryID WHERE categorytable.categorytableID = ? ORDER BY category.categoryID",[categoryTableID] , function (err, result, fields) {
+    con.query("SELECT * FROM category WHERE parentID = ? ORDER BY categoryID",[parentID] , function (err, result, fields) {
         //console.log(result);
         //ret = result[0];
         data(result);
@@ -115,7 +112,7 @@ async function getCatgories(categoryTableID){
 }
 
 
-async function loadHomepage(){
+async function loadPage(pageToLoad){
   //Connect to database
   //Change to local values for database
   con = mysql.createConnection({
@@ -135,23 +132,28 @@ async function loadHomepage(){
   currentCourse = await getCourse(1);
   console.log(currentCourse);
 
-  //Get homepage data
-  currentPage = await getHomepage(currentCourse.courseID);
+  //Get page data
+  if (pageToLoad = "homepage"){
+    currentPage = await getHomepage(currentCourse.courseID);
+  }
+  else{
+    currentPage = await getCategory(pageToLoad);
+  }
   console.log(currentPage);
 
-  //Get homepage module data
+  //Get page module data
   modules = await getModules(currentPage.categoryID);
   console.log(modules);
 
   //Load module content onto webpage
   await loadContent(modules);
 
-  //Get course's categories (does not include subcategories)
-  currentCategories = await getCategory(currentCourse.categoryTableID);
+  //Get pages's categories
+  currentCategories = await getCatgories(currentPage.categoryID);
 
 
   //Finish loading homepage and close connection
   con.end();
 }
 
-loadHomepage();
+loadPage("homepage");
