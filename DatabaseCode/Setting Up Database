@@ -1,0 +1,15 @@
+Download the local database here: https://dev.mysql.com/downloads/file/?id=516927
+
+Just follow the youtube video below and make sure you are in the place where mysql.exe is
+and as a test put the database name as world, it is a test database apart of the package you download
+This is an example path that you can use as a reference: C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+Follow this video to connect MySQL database to VScode: https://www.youtube.com/watch?v=wzdCpJY6Y4c
+
+After finishing video run this line of code in an MySQL connection to create the database:
+CREATE DATABASE courseResourceLibrary;
+
+After this is done, modify the connection from the test database 'world' to 'courseResourceLibrary' by right clicking on the connection in the top left when
+connections are selected and select edit connection. Then change the Database field to 'courseResourceLibrary' and select save connection.
+
+Run the TableSetup SQL code to set up the tables, and then the DatabaseTestData to make sure it is setup correctly.
