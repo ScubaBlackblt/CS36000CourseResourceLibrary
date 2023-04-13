@@ -5,21 +5,58 @@
             <meta charset="UTF-8">
             <title>Course Reasouce Library</title>
             <link rel="stylesheet" href="homePageCSS.css">
-          
-       </head>
          
-           <body>
-<!----------------------------------------------->
-      <div class="top">
-        <div class="container">
-          <cite contenteditable="true">
-            Enter course name 
-            </cite>
-    </div>
-      </div>
-<!-------------------------------------------------------->
+         </head>
+       
+          <body>
+<!-----------------------Class Name Block----------------------------------------------------------->
+<!----------------datbase will need to be linked in link below upon completion for full testing----------------------->
+     <div class="top"> 
+            
+      <button class="editCourseName" oneclick="openForm()"></button>
+            <div class ="form-popup" id="classForm">
+               <form className="classNameForm" action="" method="post">
+                <input tye = "text" id="cName" class = "form-conrtol" placeholder = "Enter Class Name">
+                <button type ="submit">Submit</button>
 
-     <!---- <div class="right">-->
+                </form>    
+            </div>
+      </div>
+
+
+      <script>
+
+          function openForm() {
+           document.getElementbyId("classForm").style.dysplay = "block";
+          }
+  
+         function closeForm(){
+              document.getElementbyId("classForm").style.display = "none";
+             }
+
+         let cNameFormm = document.getElementById("classNameForm");
+  
+        cNameForm.addEventListener("submit", (e)=> {
+          e.preventDefault();
+                  
+             let cName = document.getElementById("cName");
+  
+                  if(cName.value == ""){
+                    alert("Please ensure the field is filled");
+                  }
+                  else{
+                    alert("Class Name Updated, page may need reloded for update");
+                  }
+                 ///document.getElementById("classNameFrom").style.display="none";
+                  //document.getElementById("cName").innerHTML = cName;
+  
+                });
+  
+                 
+         
+              </script>  
+   
+<!-------------------------------------------------------->
           
       <!--side navigation-->
       <div id="mySidenav" class="sidenav">
@@ -27,15 +64,19 @@
       <!--links button to javaSprit-->
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-        <!---where username and syllabus/add buttin needs to be-->
-        <!---syllabus page link ---->
-        <a class = "syllabus" ahref = "" >Syllabus</a>
+
         <!--where the content/add subcatagory needs to go-->
-         <div class = "dropdown">
-        
-        
-       
-       </div>
+        <form action="">
+          <select name="content" onchange="displayConent(this.value)">
+          <option value="hide">Contents</option>
+          
+          
+          </select>
+
+        </form>
+        <ul id="category-list"></ul>
+
+
        <a class = "addStudent" ahref = "" >  Add Student</a>
 
 
@@ -44,89 +85,199 @@
       <span style="float:right;font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
       </span>
       
-<!--sidenav js-->
+<!----------------sidenav js------------------------------------------------>
       <script>
+
         function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
+         document.getElementById("mySidenav").style.width = "250px";
+          }
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-      </script>
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          }
 
+          // Make an AJAX request to fetch the list of categories
+fetch('/categories')
+  .then(response => response.json())
+  .then(categories => {
+    // Create a list of clickable links for each category
+      const categoryList = document.getElementById('category-list');
+      categories.forEach(category => {
+      const categoryLink = document.createElement('a');
+      categoryLink.href = '#';
+      categoryLink.textContent = category.name;
+      categoryLink.addEventListener('click', () => {
+        // Make an AJAX request to fetch the data for the clicked category
+        fetch(`/data?category=${category.id}`)
+          .then(response => response.json())
+          .then(data => {
+            // Update the HTML on the page with the data
+            const dataContainer = document.createElement('div');
+            dataContainer.textContent = data;
+            document.body.appendChild(dataContainer);
+          });
+      });
+      const categoryItem = document.createElement('li');
+      categoryItem.appendChild(categoryLink);
+      categoryList.appendChild(categoryItem);
+    });
+  });
+          const sidenav = document.getElementById('mySidenav');
+          const addCatagoryButton = document.createElement('button');
+          addCatagoryButton.textContent = '+';
+          addCatagoryButton.id = 'add-Category';
+          addButton.classList.add('btn','btn')
 
-      <!--</div>-->
-      
-    <!--------------------------------------------------------------------->
-      
-      
-      <div class="main">
+           // Add an event listener to the button
+          addCategoryButton.addEventListener('click', () => {
+          // Create a text field element
+         const inputField = document.createElement('input');
+         inputField.type = 'text';
+         inputField.placeholder = 'Enter category name';
+          });
           
-          <button class="trigger">
-      +
-      </button>
-      
-      <div class="modal">
-      
-        <div class="modal-contents">
-        
-        <button class="add-image">Image
-        </button>
-        <button class="add-file">File
-        </button>
-        
-        <button class="add-text">Text</button>
-        <input type="text" id ="text-input" style="display:none">
-        
-        <button class = "submit-text" style="display:none">Submit</button>
-        
-        <button class="add-submission">Submission
-        </button>
-        
-        <span class= "close-button">x</span>
-        
-        </div>
-        
-      </div>
-      <script>
-        const modal = document.querySelector(".modal");
-  const trigger = document.querySelector(".trigger");
-  const closeButton = document.querySelector(".close-button");
-  const textButton = document.querySelector(".add-text");
-  const inputText = document.getElementById("text-input");
-  const submitText = document.querySelector(".submit-text");
-  
-  function toggleModal() {
-  modal.classList.toggle("show-modal");
-  inputText.style.display="display:none";
-  submitText.style.display="display:none";
-  }
-  
-  function windowOnClick(event) {
-  if(event.target === modal) {
-  toggleModal();
-  }
-  }
-  
-  function textAdd(event) {
-  inputText.style.display = "block";
-  submitText.style.display="block";
-  
-  }
-  
-  trigger.addEventListener("click",toggleModal);
-  closeButton.addEventListener("click", toggleModal);
-  window.addEventListener("click", windowOnClick);
-  textButton.addEventListener("click", textAdd);
-  
-  
+           
       </script>
-      </div>
 
+
+     
+      
+    <!-------------------------add components-------------------------------------------->
 
      </body>
+     <script>
+      
+        
+      const triggerDiv = document.createElement('div');
+      triggerDiv.className = "trigger-div"; 
+      document.body.appendChild(triggerDiv);
+      
+      const triggerButton = document.createElement('button');
+      triggerButton.innerText = '+';
+      triggerButton.className = "trigger";
+      triggerDiv.appendChild(triggerButton);
+      
+      const listDiv = document.createElement('div');
+      listDiv.className = "list-div";
+      document.body.appendChild(listDiv);
 
+      const modal = document.createElement('div');
+      modal.className = "modal";
+      document.body.appendChild(modal);
+
+      const modalContents = document.createElement('div');
+      modalContents.className= "modal-contents";
+      modal.appendChild(modalContents);
+
+      const imageButton = document.createElement('button');
+      imageButton.innerText = 'Image';
+      imageButton.className = "add-image";
+      modalContents.appendChild(imageButton);
+
+      const fileButton = document.createElement('button');
+      fileButton.innerText = 'File';
+      fileButton.className = "add-file";
+      modalContents.appendChild(fileButton);
+
+      const textButton = document.createElement('button');
+      textButton.innerText = 'Text';
+      textButton.className = "add-text";
+      modalContents.appendChild(textButton);
+
+      const submissionButton = document.createElement('button');
+      submissionButton.innerText = 'Submission';
+      submissionButton.className = "add-submission";
+      modalContents.appendChild(submissionButton);
+
+      var userText = document.createElement("INPUT");
+      userText.setAttribute("type", "text");
+      userText.className = "text-input";
+      modalContents.appendChild(userText);
+
+      var selectedFile = document.createElement("INPUT");
+      selectedFile.setAttribute("type", "file");
+      selectedFile.className = "selected-file";
+      modalContents.appendChild(selectedFile);
+
+      const fileSubmitButton = document.createElement('button');
+      fileSubmitButton.innerText = 'Submit';
+      fileSubmitButton.className = "submit-file";
+      modalContents.appendChild(fileSubmitButton);
+
+      const textSubmitButton = document.createElement('button');
+      textSubmitButton.innerText = 'Submit';
+      textSubmitButton.className = "submit-text";
+      modalContents.appendChild(textSubmitButton);
+
+      const closeButton = document.createElement('span');
+      closeButton.innerText = 'x';
+      closeButton.className = "close-button";
+      modalContents.appendChild(closeButton);
+
+
+      triggerButton.addEventListener('click', () => {
+          modal.classList.toggle("show-modal");
+          selectedFile.style.visibility = 'hidden';
+          userText.value = userText.defaultValue;
+      })
+
+      window.addEventListener('click', () => {
+          if(event.target === modal) {
+              modal.classList.toggle("show-modal");
+          }
+      })
+
+      imageButton.addEventListener('click', () => {
+          selectedFile.style.visibility = 'visible';
+          userText.style.visibility = 'hidden';
+          textSubmitButton.style.visibility = 'hidden';
+
+          let pickedImg = selectedFile.src;
+      })
+
+      fileButton.addEventListener('click', () => {
+          selectedFile.style.visibility = 'visible';
+          fileSubmitButton.style.visibility = 'visible';
+          userText.style.visibility = 'hidden';
+          textSubmitButton.style.visibility = 'hidden';
+      })
+
+      fileSubmitButton.addEventListener('click', () => {
+          var file = selectedFile.files[0].name;
+          let fileNameInput = document.createTextNode(file);
+
+          modal.classList.toggle("show-modal");
+          addToList(fileNameInput);
+      })
+
+      textButton.addEventListener('click', () => {
+          selectedFile.style.visibility = 'hidden';
+          fileSubmitButton.style.visibility = 'hidden';
+          userText.style.visibility = 'visible';
+          textSubmitButton.style.visibility = 'visible';
+
+      })
+
+      textSubmitButton.addEventListener('click', () => {
+          userInput = userText.value;
+          let insertTextInput = document.createTextNode(userInput);
+
+          modal.classList.toggle("show-modal");
+          addToList(insertTextInput);
+      })
+
+      function addToList(child) {
+          const list = document.createElement("li");
+          list.style.listStyle = "none"
+          list.appendChild(child);
+          if(listDiv.hasChildNodes()) {
+              listDiv.insertBefore(list, listDiv.firstChild);
+          }
+          else {
+              listDiv.appendChild(list);
+          }
+      }
+  </script>
     </html>
    
 

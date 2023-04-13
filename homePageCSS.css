@@ -4,23 +4,70 @@
     height: 100px;
     background-color: #C0C0C0;
     text-align: center;
+    
 
 }
 
-.cite{
-  position:absolute;
-  bottom: 0;
-  font-weight: bold;
-}
 
-.syllabus{ 
-  background-color: #f44336;
+.editCourseName {
+  background-color: #C0C0C0;
   color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  right: 1rem;
+  width: 4em;
+  
+
 }
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 3rem;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+} 
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+
+
+
+
+.syllabus {
+  background-color: #eee;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  width: 10em;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  color: rgb(59, 49, 49);
+  box-shadow: 0 0.4rem #dfd9d9;
+  cursor: pointer;
+ }
+ 
+ .syllabus:active {
+  color: white;
+  box-shadow: 0 0.2rem #dfd9d9;
+  transform: translateY(0.2rem);
+ }
+ 
+ .syllabus:hover:not(:disabled) {
+  background: lightcoral;
+  color: white;
+  text-shadow: 0 0.1rem #bcb4b4;
+ }
+ 
+ .syllabus:disabled {
+  cursor: auto;
+  color: grey;
+ }
+
 .sidenav {
   height: 100%; 
   width: 0; /* 0 width - change this with JavaScript */
@@ -42,109 +89,209 @@
   display: block;
   transition: 0.3s;
 }
-.addStudent{
-  background-color: #f44336;
-  color: white;
-  padding: 14px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  bottom:0;
+select{
+  appearance: none;
+  border: none;
+  background-color: none;
+  padding: 1rem;
+  width:12em;
+  height: 2.3em;
+  font-size: 1.48rem;
+  color: grey;
+ box-shadow: 0 0.4rem #dfd9d9;
+ background-color: #eee;
 }
 
+
+.addStudent{
+  
+    background-color: #eee;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    width: 10em;
+    margin-top: 32rem;
+    border-radius: 1rem;
+    color: lightcoral;
+    box-shadow: 0 0.4rem #dfd9d9;
+    cursor: pointer;
+   }
+   
+   .addStudent:active {
+    color: white;
+    box-shadow: 0 0.2rem #dfd9d9;
+    transform: translateY(0.2rem);
+   }
+   
+   .addStudent:hover:not(:disabled) {
+    background: lightcoral;
+    color: white;
+    text-shadow: 0 0.1rem #bcb4b4;
+   }
+   
+   .addStudent:disabled {
+    cursor: auto;
+    color: grey;
+   }
 .main {
     height: 550px;
     width: 80%;
     position: relative;
     text-align: center;
  }
+ .contentContainer{
+  height:fit-content;
+  width: fit-content;
+ }
  .trigger {
   position: absolute;
   bottom:0;
+   
+
 
  }
  
  /*add content button css*/
  .modal {
-    position: relative;
-    left: 5%;
-    top: 50%;
-    bottom: 50%;
-    right: 25%;
-    width: 400px;
-    height: 50px;
-    /*background-color: rgba(0, 0, 0, 0.2);*/
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.1);
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-    vertical-align: middle;
-    padding: 100px 100px 100px 100px;
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  width: 700px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  vertical-align: middle;
+  padding: 100px 100px 100px 100px;
 }
 
-/*trigger {
-  
-}*/
+.trigger {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 .close-button {
-    float: right;
-    width: 1.5rem;
-    line-height: 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    background-color: lightgray;
+  position: absolute;
+  top: 0;
+  right: 0;
+  float: right;
+  width: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: lightgray;
 }
 
 .close-button:hover {
-    background-color: darkgray;
+  background-color: darkgray;
 }
 
 .show-modal {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1.0);
-    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-}
-.add-image {
-  background-color: red;
-  border-radius: 0.25rem;
-}
-.add-image:hover {
-  background-color: darkred;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
-.add-file {
-  background-color: cyan;
+.add-image {
+  margin-left: 50px;
+  margin-right: 50px;
+  background-image: url('https://cdn.onlinewebfonts.com/svg/img_520029.png');
+  background-size: 85%;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
   border-radius: 0.25rem;
+  line-height: 180px;
 }
+
+.add-image:hover {
+  background-color: powderBlue;
+}
+
+
+.add-file {
+  margin-right: 50px;
+  background-image: url('https://cdn.onlinewebfonts.com/svg/img_520494.png');
+  background-size: 80%;
+  background-repeat: no-repeat;
+  border-radius: 0.25rem;
+  width: 100px;
+  height: 100px;
+  line-height: 180px;
+}
+
 .add-file:hover {
-  background-color: darkturquoise;
+  background-color: powderBlue;
+
+}
+
+.selected-file {
+  padding: 20px;
+}
+
+.submit-file{
+  background-color: lightgray;
+  border-radius: 0.25rem;
+  visibility: hidden;
 }
 
 .add-text {
-  background-color: lime;
+  margin-right: 50px;
+  background-image: url('https://cdn3.iconfinder.com/data/icons/symbol-black-common-2/32/text-add-512.png');
+  background-size: 85%;
+  background-repeat: no-repeat;
   border-radius: 0.25rem;
+  width: 100px;
+  height: 100px;
+  line-height: 180px;
 }
 
-#text-input {
-  margin-top: 10px;
+.text-input {
+  
+  margin-left: 50px;
+  margin-top: 20px;
+  visibility: hidden;
 }
 
 .submit-text {
-  background-color: gray;
+  visibility: hidden;
+  margin-left: 50px;
+  background-color: lightgray;
   border-radius: 0.25rem;
+  width: 100px;
+  height: 50;
 }
+
+.submit-text:hover {
+  background-color: darkgray;
+}
+
 .add-text:hover {
-  background-color: green;
+  background-color: powderBlue;
 }
 
 .add-submission {
-  background-color: gold;
+  margin-right: 50px;
+  background-image: url('https://csci1210.com/images/assignment.png');
+  background-size: 80%;
+  background-repeat: no-repeat;
   border-radius: 0.25rem;
+  width: 100px;
+  height: 100px;
+  line-height: 180px;
 }
 
 .add-submission:hover {
-  background-color: goldenrod;
-} 
+  background-color: powderBlue;
+}
+
+.list-div {
+text-align: center;
+padding: 100px;
+}
 /*end of button*/
