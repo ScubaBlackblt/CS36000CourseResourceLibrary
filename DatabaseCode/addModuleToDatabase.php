@@ -9,7 +9,7 @@ $sql = "INSERT INTO module (categoryID) VALUES ".$pageID.";";
 $con->query($sql);
 
 $sql = "SELECT LAST_INSERT_ID(moduleID) AS ID FROM module ORDER BY LAST_INSERT_ID(moduleID) DESC LIMIT 1";
-$moduleID = $con->query($sql);
+$moduleID = $con->query($sql)->fetch_assoc()['ID'];
 
 if ($contentType = "submission"){
   $sql = "INSERT INTO content (moduleID, contentType) VALUES" .$moduleID. "," .$contentType.";";
