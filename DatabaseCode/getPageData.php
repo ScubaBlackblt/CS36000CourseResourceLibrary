@@ -2,29 +2,48 @@
         include 'connect.php';
 
         $sql = "SELECT * FROM course WHERE courseID = 1";
-        $course = $con->query($sql);
+        $course = $con->query($sql)->fetch_assoc();
 
-        if ($pageID = "homepage"){
-          $sql = "SELECT * FROM category WHERE courseID = 1";
-          $page = $con->query($sql);
+        //$pageID = $_GET['pageID'];
+        $pageID = "homepage";
+
+        if ($pageID == "homepage"){
+          $sql = "SELECT * FROM category WHERE courseID = ".$course['courseID'].";";
+          $page = $con->query($sql)->fetch_assoc();
         }
         else{
-          $sql = "SELECT * FROM category WHERE categoryID = 1";
-          $page = $con->query($sql);
+          $sql = "SELECT * FROM category WHERE categoryID = ".$pageID.";";
+          $page = $con->query($sql)->fetch_assoc();
+        }
+        $subcategoriesArray = array();
+        if ($page['canHaveSubcategories'] == 1){
+            $sql = "SELECT * FROM category WHERE parentID = ".$page['categoryID'].";";
+            $subcategories = $con->query($sql);
+            if ($subcategories->num_rows > 0) {
+                while($subcategory = $subcategories->fetch_assoc()) {
+                    array_push($subcategoriesArray, $subcategory);
+                }
+            }
         }
 
-        $sql = "SELECT content.* FROM content INNER JOIN module ON module.moduleID = content.moduleID INNER JOIN category ON category.categoryID = module.categoryID WHERE category.categoryID = 1 ORDER BY content.contentID";
-        $content = $con->query($sql);
-          
-          if ($content->num_rows > 0) {
-            // output data of each row
-            while($row = $content->fetch_assoc()) {
-              echo "id: " . $row["contentID"]. "<br>";
+        $sql = "SELECT content.* FROM content INNER JOIN module ON module.moduleID = content.moduleID INNER JOIN category ON category.categoryID = module.categoryID WHERE category.categoryID = ".$page['categoryID']." ORDER BY content.contentID";
+        $contents = $con->query($sql);
+        $contentArray = array();
+        $submissions = array();
+        if ($contents->num_rows > 0) {
+            while($content = $contents->fetch_assoc()) {
+                array_push($contentArray, $content);
+                if ($content['contentType'] == "submssion"){
+                    $sql = "SELECT * FROM submissions WHERE contentID = ".$content['contentID'].";";
+                    $submission = $con->query($sql)->fetch_assoc();
+                    echo "test";
+                    array_push($submissions, $submission);
+                }  
             }
-          } else {
-            echo "0 results";
-          }
-        
+        }
+
+        $output = array($course, $page, $subcategoriesArray, $contentArray, $submissions);
+
+        echo json_encode($output);
         $con->close();
-        // echo 'welcome to php';
         ?>
