@@ -6,6 +6,6 @@ $user="megan";
 $password="pass1";
 $dbname="courseresourcelibrary";
 
-$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
+$con2 = new mysqli($host, $user, $password, $dbname, $port, $socket)
   or die ('Could not connect to the database server' . mysqli_connect_error());
 ?>
