@@ -21,12 +21,12 @@ Login page
 		<img src="Education Banner.jpeg" id="banner" alt="" />
 	</header>
 	<div>
-		<form action="http://localhost:3000/CS36000CourseResourceLibrary-main/DatabaseCode/homePage.php" method="POST">
-			<input name="userName" id="userName" type="text" placeholder="User Name" required />
+		<form action="DatabaseCode/checkPassword.php" method="POST">
+			<input name="usernameIn" id="username" type="text" placeholder="User Name" required />
 			<input name="password" id="password" type="password" required placeholder="Password" />
 			<input value="Submit" type="submit" />
 		</form>
-		<form action="create.html?test=blue" method="POST">
+		<form action="registrationPage.php" method="POST">
 			<input value="Create Account" type="submit" />
 		</form>
 	</div>
