@@ -30,7 +30,7 @@ $usersPassword = $_POST['password'];
             exit();
         }
     }
-    header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/homepage.php?userID=$userID&courseID=$courseID");
+    header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/homepage.php?userID=$userID&courseID=$courseID&pageID=homepage");
  }
 
  else 
