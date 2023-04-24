@@ -141,6 +141,11 @@
   padding: 100px;
 }
 
+.submission-list {
+  text-align: center;
+  padding: 100px;
+}
+
 li {
   margin-top: 5px;
   padding: 10px;
@@ -148,6 +153,7 @@ li {
   border-radius: 15px;
   box-shadow: 0 0 8px 5px #0ff;
 }
+
 
 img {
   max-width: 100%;
