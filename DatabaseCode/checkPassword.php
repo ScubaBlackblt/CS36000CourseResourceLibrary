@@ -7,7 +7,7 @@ $usernameIN = $_POST['usernameIn'];
 $sql = "SELECT userPassword, courseID, typeOfAccount, userID FROM user WHERE username = '$usernameIN';";
 $result = $con->query($sql)->fetch_assoc();
 if (empty($result)){
-    header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/loginPage.php");
+    header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/loginPage.php?error=incorrectLogin");
 }
 
 $hash = $result["userPassword"];
@@ -26,7 +26,7 @@ $usersPassword = $_POST['password'];
         $sql = "SELECT * FROM studentsJoined WHERE userID = '$userID' AND courseID= ".$courseID.";";
         $joined = $con->query($sql)->fetch_assoc();
         if (empty($joined)){
-            header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/loginPage.php");
+            header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/loginPage.php?error=noAccess");
             exit();
         }
     }
@@ -36,7 +36,7 @@ $usersPassword = $_POST['password'];
  else 
  {
     /* tell the user the username/password combo is invalid */
-    header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/loginPage.php");
+    header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/loginPage.php?error=incorrectLogin");
  }
 
  $con->close();
