@@ -76,7 +76,7 @@
         const urlParams = new URLSearchParams(queryString);
         const courseID = urlParams.get('courseID');
         var div = document.createElement("div");
-        div.innerHTML = '<form action="DatabaseCode/acceptRequest.php?courseID='+courseID+'" method="post" ><label>' + username + '</label><input name="accept/decline" type="radio" value="accept">Accept</input><input name="accept/decline" type="radio" value="decline">Decline</input><input type="submit" /><input name="userID" value=' + userID + ' style="visibility: hidden"></form>';
+        div.innerHTML = '<form action="DatabaseCode/acceptRequest.php?courseID='+courseID+'&userID='+userID+'" method="post" ><label>' + username + '</label><input name="accept/decline" type="radio" value="accept">Accept</input><input name="accept/decline" type="radio" value="decline">Decline</input><input type="submit" /><input name="userID" value=' + userID + ' style="visibility: hidden"></form>';
         var requests = document.getElementById("requests");
         requests.appendChild(div);
     }
