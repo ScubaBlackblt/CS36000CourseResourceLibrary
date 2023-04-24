@@ -33,25 +33,25 @@
             </button>
 
 
-            <form action="addModuleToDatabase.php" method="post" id="text-form">
+            <form method="post" id="text-form">
                 <input type="text" id="text-input" name="content">
                 <input type="submit" name="text-submit" />
                 <input name="contentType" value="text" style="visibility: hidden">
             </form>
 
-            <form action="addModuleToDatabase.php" method="post" id="file-form">
+            <form method="post" id="file-form">
                 <input type="file" id="selected-file" name="content"> </input>
                 <input type="submit" name="file-submit" />
                 <input name="contentType" value="file" style="visibility: hidden">
             </form>
 
-            <form action="addModuleToDatabase.php" method="post" id="photo-form">
+            <form method="post" id="photo-form">
                 <input type="file" id="selected-photo" name="content"></input>
                 <input type="submit" name="submit-photo" />
                 <input name="contentType" value="image" style="visibility: hidden">
             </form>
 
-            <form action="addModuleToDatabase.php" method="post" id="submission-form">
+            <form method="post" id="submission-form">
                 <input type="file" id="selected-submission" name="content"></input>
                 <input type="submit" name="submit-submission"></input>
                 <input name="contentType" value="submission" style="visibility: hidden">
@@ -66,6 +66,22 @@
 </body>
 
 <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const courseID = urlParams.get('courseID');
+    const userID = urlParams.get('userID');
+    const pageID = urlParams.get('pageID');
+    //action="addModuleToDatabase.php"
+
+    var t = document.getElementById("text-form");
+    t.action = "addModuleToDatabase.php?courseID="+courseID+"&userID="+userID+"&pageID="+pageID;
+    var f = document.getElementById("file-form");
+    f.action = "addModuleToDatabase.php?courseID="+courseID+"&userID="+userID+"&pageID="+pageID;
+    var p = document.getElementById("photo-form");
+    p.action = "addModuleToDatabase.php?courseID="+courseID+"&userID="+userID+"&pageID="+pageID;
+    var s = document.getElementById("submission-form");
+    s.action = "addModuleToDatabase.php?courseID="+courseID+"&userID="+userID+"&pageID="+pageID;
+
     fetch("getPageData.php")
         .then((response) => {
             if (!response.ok) {
