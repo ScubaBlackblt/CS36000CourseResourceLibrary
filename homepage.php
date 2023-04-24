@@ -22,19 +22,14 @@
             </div>
       </div>
       
-
-
       
    
 <!-------------------------------------------------------->
           
       <!--side navigation-->
       <div id="mySidenav" class="sidenav">
-
       <!--links button to javaSprit-->
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-
         <!--the list that displays all cataries in side bar, js add each new list item and pulls both the course id and---------------
         -------------and the catagory name from database for creation ------------------------------------------------->
         <div class = "container" id="buttons-container">
@@ -45,24 +40,23 @@
         <br>
        <button type ="button" id="addCatagories" onclick="openCatPopup()">+</button>
        <div class= "catagoriesPopup" id = "catPopup"> 
-        <form getCatagories = "catagoriesForm" action="addCategoryToDatabase.php" method="post">
+        <form getCatagories = "catagoriesForm" action="addCategoryToDatabase.php" method="post" id="categoryForm">
           <input type="text" id= catagoryName name= "name" placeholder="Enter catagory name">
            <br>
-          <input type="radio" id=subCatagoryToggle name="canHaveSubcategories" value="1">
+           <select name="canHaveSubcategories">
+				<option value="1">Can have subcategories</option>
+				<option value="0">Can't have subcategories</option>
+			</select>
           <label for="subCatagoryToggle">Has a subcatagory</label>
            <button type = "submit">confirm </button>
            <button type = "button" id = "catagoryCancel" onclick="closeCatPopup()">Cancel</button>
       </form>
-
        </div> 
        <button type= "button" id = "addStudent" onclick="changePage()" >  Add Student</a>
-
-
       </div>
       <!--this is the button position, size-->
       <span style="float:right;font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
       </span>
-
       <div class ="main" id="contentSection"> 
         <button type = "button" id = "backToHome"><</button>           
       </div>
@@ -111,11 +105,6 @@
             <span class="close-button">x</span>
         </div>
     </div>
-
-
-
-
-
      
      
       
