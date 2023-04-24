@@ -13,12 +13,9 @@
     </div>
 
     <div class="list-div">
-        <ul class="list">
-        </ul>
     </div>
 
-
-    <div class="show-added">
+    <div class="submission-list">
     </div>
 
     <div class="modal">
@@ -69,8 +66,6 @@
 </body>
 
 <script>
-    //From what I've read, I think that putting the HTML of the database it's being sent to directs it to where it's sent
-
     fetch("getPageData.php")
         .then((response) => {
             if (!response.ok) {
@@ -118,7 +113,7 @@
             var fileSubmitForm = document.getElementById("file-form");
             var photoSubmitForm = document.getElementById("photo-form");
             var submissionSubmitForm = document.getElementById("submission-form");
-            const showAdd = document.querySelector(".show-added");
+            const submissionList = document.querySelector("submission-list");
 
             trigger.addEventListener('click', () => {
                 modal.classList.toggle("show-modal");
@@ -157,30 +152,6 @@
                 currentlySelected = "image";
             })
 
-            function submitPhoto() {
-
-                if (verifyImage(selectedPhoto.files[0]) == 1) {
-
-                    modal.classList.toggle("show-modal");
-
-                    var img = selectedPhoto.files[0];
-                    var imgReader = new FileReader();
-
-                    imgReader.onload = function(e) {
-
-                        var showImage = document.createElement("img");
-                        showImage.src = e.target.result;
-                        contentType = "image";
-                        textEntered = "none";
-                        addToList(showImage);
-                    }
-
-                    imgReader.readAsDataURL(img);
-
-                }
-
-            }
-
             fileButton.addEventListener('click', () => {
                 textSubmitForm.style.visibility = 'hidden';
                 fileSubmitForm.style.visibility = 'visible';
@@ -189,17 +160,9 @@
                 currentlySelected = "file";
             })
 
-            function submitFile() {
-                var file = selectedFile.files[0].name;
+            function submitFile(databaseFile) {
+                var file = dataBaseFile
                 let fileNameInput = document.createTextNode(file);
-
-                modal.classList.toggle("show-modal");
-                fileCounter++;
-
-                contentID = fileCounter;
-                moduleID = "file";
-                contentType = "file";
-                textEntered = "none";
                 addToList(fileNameInput);
             }
 
@@ -221,23 +184,10 @@
 
             })
 
-            function submitSubmissionFile() {
-                var chosenFile = selectedFile.files[0].name;
-
-                const response = confirm("Is this the file you would like to submit?");
-
-                if (response) {
-                    //This is where it will be sent to the database.
-                    submissionCounter++;
-
-                    contentID = submissionCounter;
-                    moduleID = "sub";
-                    contentType = "submission";
-                    textEntered = "none";
-
-                    alert("Your assignment was submitted!");
-                    modal.classList.toggle("show-modal");
-                }
+            function showSubmittedFiles(dataBaseSubmission) {
+                var fileSubmitted = databaseSubmission;
+                var showSubmitted = document.createTextNode(databaseSubmission);
+                addtoList(showSubmitted);
             }
 
 
@@ -248,6 +198,13 @@
                 listDiv.appendChild(list);
             }
 
+            function addSubmission(child) {
+                const sList = document.createElement("li");
+                sList.style.listStyle = "none";
+                submissionList.appendChild(child);
+
+            }
+
             for (var i = 0; i < contents.length; i++) {
                 //Data order: contentID, moduleID, contentType, textEntered;
                 var contentID = contents[i].contentID;
@@ -255,31 +212,44 @@
                 var contentType = contents[i].contentType;
                 var textEntered = contents[i].textEntered;
 
-                    let insertTextInput = document.createTextNode(textEntered);
-
-                    addToList(insertTextInput);
-
-
-
-            }
-
-            function verifyImage(file) {
-
-                let filename = file.name;
-                const fileExt = filename.split('.').pop();
-
-                if (fileExt == "jpg" || fileExt == "png") {
-                    return 1;
-                } else {
-                    alert("Please select a valid photo type (.jpg or .png)");
-                    return -1;
+                switch (contentType) {
+                    case "text":
+                        let insertTextInput = document.createTextNode(textEntered);
+                        addToList(insertTextInput);
+                        break;
+                    case "textbox":
+                        let insertTextBox = document.createTextNode(textEntered);
+                        addToList(insertTextBox);
+                        break;
+                    case "image":
+                        submitPhoto(textEntered);
+                        break;
+                    case "file":
+                        let testfile = document.createTextNode(textEntered);
+                        addToList(testfile);
+                        break;
+                    case "submission":
+                        let submissionFile = document.createTextNode(textEntered);
+                        addSubmission(submissionFile);
+                        break;
+                    default:
+                        break;
                 }
+
+
             }
+
+            function submitPhoto(nameOfPhoto) {
+                    var imgURL = nameOfPhoto;
+                    let generatedImg = document.createElement("img");
+
+                    generatedImg.src = imgURL;
+                    addToList(generatedImg);
+                }
         })
         .catch((error) => {
             // This is where you handle errors.
         });
-
 </script>
 
 </html>
