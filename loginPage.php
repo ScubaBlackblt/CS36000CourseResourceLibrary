@@ -11,7 +11,7 @@ Login page
 	intitial-scale=1" />
 	<!-- Links to style pages and scripts -->
 	<link href="stylesheet.css" rel="stylesheet" />
-	<script src="script.js"></script>
+	
 
 </head>
 
@@ -33,6 +33,22 @@ Login page
 
 
 	<footer></footer>
+</body>
+<script>
+		const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+		const error = urlParams.get('error');
+        if (error != null){
+			
+			if(error == "incorrectLogin"){
+				alert("Incorrect Username or Password");
+			}
+			else{
+				alert("You do not have access to the course, ask teacher for access");
+			}
+		}
+	</script>
+</html>
 </body>
 
 </html>
