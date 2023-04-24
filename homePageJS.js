@@ -1,5 +1,4 @@
-
-    function openForm() {
+function openForm() {
   document.getElementById("classForm").style.display = "block"
  }  
 function closeForm(){
@@ -71,6 +70,7 @@ function addCategoriesToPage(categories){
     var div = document.createElement("div");
     var div = document.createElement("div");
     div.innerHTML = '<form action="homepage.php?courseID='+courseID+'&userID='+userID+'&pageID='+pageID+'" method="post" ><label>' + category.categoryName + '</label><input type="submit">Go to </input></form>';
+    addCategoryDeleteListener(div, pageID);
     var requests = document.getElementById("buttons-container");
     requests.appendChild(div);
   }
@@ -107,7 +107,6 @@ fetch("DatabaseCode/getPageData.php?pageID="+pageID)
           var contents = data[3];
           var submissions = data[4];
 
-          
          // put page load code here like calling loadPage(data); and putting above declarations at start of function
           var imageCounter = 0;
           var fileCounter = 0;
@@ -178,7 +177,7 @@ fetch("DatabaseCode/getPageData.php?pageID="+pageID)
                       showImage.src = e.target.result;
                       contentType = "image";
                       textEntered = "none";
-                      addToList(showImage);
+                      //addToList(showImage);
                   }
                   imgReader.readAsDataURL(img);
               }
@@ -199,7 +198,7 @@ fetch("DatabaseCode/getPageData.php?pageID="+pageID)
               moduleID = "file";
               contentType = "file";
               textEntered = "none";
-              addToList(fileNameInput);
+              //addToList(fileNameInput);
           }
           textButton.addEventListener('click', () => {
               textSubmitForm.style.visibility = 'visible';
@@ -229,9 +228,10 @@ fetch("DatabaseCode/getPageData.php?pageID="+pageID)
                   modal.classList.toggle("show-modal");
               }
           }
-          function addToList(child) {
+          function addToList(child,moduleID) {
               const list = document.createElement("li");
               list.style.listStyle = "none"
+              addModuleDeleteListener(list,moduleID);
               list.appendChild(child);
               listDiv.appendChild(list);
           }
@@ -242,7 +242,7 @@ fetch("DatabaseCode/getPageData.php?pageID="+pageID)
               var contentType = contents[i].contentType;
               var textEntered = contents[i].textEntered;
                   let insertTextInput = document.createTextNode(textEntered);
-                  addToList(insertTextInput);
+                  addToList(insertTextInput, moduleID);
           }
           function verifyImage(file) {
               let filename = file.name;
@@ -260,6 +260,46 @@ fetch("DatabaseCode/getPageData.php?pageID="+pageID)
           // This is where you handle errors.
       });
 
+      function addModuleDeleteListener(module,moduleID){
+        module.addEventListener('contextmenu', function(ev) {
+            ev.preventDefault();
+            var answer = confirm("Delete Module?")
+            if (answer){
+                //alert("confirm");
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const courseID = urlParams.get('courseID');
+                const userID = urlParams.get('userID');
+                const pageID = urlParams.get('pageID');
+                document.location.assign("http://localhost:3000/CS36000CourseResourceLibrary-main/DatabaseCode/deleteModuleFromDatabase.php?pageID="+pageID+"&courseID="+courseID+"&userID="+userID+"&moduleID="+moduleID);
+        
+            }
+            else{
+                //alert("decline");
+            }
+            return false;
+        }, false);
+      }
+      function addCategoryDeleteListener(category,categoryID){
+        category.addEventListener('contextmenu', function(ev) {
+            ev.preventDefault();
+            var answer = confirm("Delete Category?")
+            if (answer){
+                //alert("confirm");
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const courseID = urlParams.get('courseID');
+                const userID = urlParams.get('userID');
+                const pageID = urlParams.get('pageID');
+                document.location.assign("http://localhost:3000/CS36000CourseResourceLibrary-main/DatabaseCode/deleteCategoryFromDatabase.php?pageID="+pageID+"&courseID="+courseID+"&userID="+userID+"&categoryID="+categoryID);
+        
+            }
+            else{
+                //alert("decline");
+            }
+            return false;
+        }, false);
+      }
 
 
 //    function showCatagory(catagory_id){
@@ -282,5 +322,3 @@ fetch("DatabaseCode/getPageData.php?pageID="+pageID)
 //        showItem(id);
 //      }
 //    });
-                 
-         
