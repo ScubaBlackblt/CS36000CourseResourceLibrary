@@ -35,18 +35,18 @@ CREATE TABLE Course (
 CREATE TABLE User (
     userID INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(20) NOT NULL,
-    userPassword VARCHAR(15) NOT NULL,
+    userPassword VARCHAR(500) NOT NULL,
     courseID INT,
     typeOfAccount VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE JoinRequestTable (
     userID INT PRIMARY KEY,
-    classID INT
+    courseID INT
 );
 
 CREATE TABLE StudentsJoined (
     userID INT,
-    classID INT,
-    CONSTRAINT PK_Joined PRIMARY KEY (classID, userID)
+    courseID INT,
+    CONSTRAINT PK_Joined PRIMARY KEY (courseID, userID)
 );

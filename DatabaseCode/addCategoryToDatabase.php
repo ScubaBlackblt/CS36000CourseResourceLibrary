@@ -4,7 +4,7 @@ global $courseID;
 $gotHomepageID = false;
 $canHaveSubcategories = $_POST['canHaveSubcategories'];
 $categoryName = $_POST['name'];
-$parentID = $_GET['pageID'];
+$pageID = $_GET['pageID'];
 $userID = $_GET['userID'];
 $courseID = $_GET['courseID'];
 if ($parentID == "homepage"){
@@ -14,7 +14,7 @@ if ($parentID == "homepage"){
 }
 
 
-$sql = "INSERT INTO category (categoryName, canHaveSubcategories, parentID) VALUES ('$categoryName',".$canHaveSubcategories.",".$parentID.");";
+$sql = "INSERT INTO category (categoryName, canHaveSubcategories, parentID) VALUES ('$categoryName',".$canHaveSubcategories.",".$pageID.");";
 $con2->query($sql);
 
 
@@ -23,6 +23,6 @@ if ($gotHomepageID){
     header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/homepage.php?userID=$userID&courseID=$courseID&pageID=homepage");
 }
 else{
-    header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/homepage.php?userID=$userID&courseID=$courseID&pageID=$parentID");
+    header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/homepage.php?userID=$userID&courseID=$courseID&pageID=$pageID");
 }
 ?>

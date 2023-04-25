@@ -5,6 +5,10 @@ var modules = null;
 var con = null;
 var submissions = null;
 
+function test(){
+  alert("running code");
+}
+
 
 async function getCourse(courseID){
         return new Promise(data =>
@@ -111,6 +115,19 @@ async function getCatgories(parentID){
   );
 }
 
+function addCategoryToPage(category){
+  
+}
+
+async function loadCategories(categories){
+  for (const i = 0; i < categories.length; i++){
+    var category = categories[i];
+    
+    
+    
+  }
+}
+
 
 async function loadPage(pageToLoad){
   //Connect to database
@@ -151,9 +168,10 @@ async function loadPage(pageToLoad){
   //Get pages's categories
   currentCategories = await getCatgories(currentPage.categoryID);
 
+  console.log(currentCategories);
 
   //Finish loading homepage and close connection
   con.end();
 }
-
+alert("running code");
 loadPage("homepage");

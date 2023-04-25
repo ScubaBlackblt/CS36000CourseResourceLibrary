@@ -2,8 +2,8 @@
 $host="localhost";
 $port=3306;
 $socket="";
-$user="megan";
-$password="pass1";
+$user="sqluser";
+$password="password";
 $dbname="courseresourcelibrary";
 
 $con = new mysqli($host, $user, $password, $dbname, $port, $socket)

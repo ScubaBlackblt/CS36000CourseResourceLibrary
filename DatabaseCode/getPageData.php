@@ -4,8 +4,8 @@
         $sql = "SELECT * FROM course WHERE courseID = 1";
         $course = $con->query($sql)->fetch_assoc();
 
-        //$pageID = $_GET['pageID'];
-        $pageID = "homepage";
+        $pageID = $_GET['pageID'];
+        // $pageID = "homepage";
 
         if ($pageID == "homepage"){
           $sql = "SELECT * FROM category WHERE courseID = ".$course['courseID'].";";
@@ -46,4 +46,4 @@
 
         echo json_encode($output);
         $con->close();
-        ?>
+?>

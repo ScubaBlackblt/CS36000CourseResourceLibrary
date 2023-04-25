@@ -10,6 +10,6 @@ $sql = "SELECT LAST_INSERT_ID(courseID) AS ID FROM course ORDER BY LAST_INSERT_I
 $courseID = $con->query($sql)->fetch_assoc()['ID'];
 $con->close();
 include 'connect2.php';
-$sql = "INSERT INTO category (categoryName, canHaveSubcategories, parentID) VALUES ('Homepage', 1,".$courseID.");";
+$sql = "INSERT INTO category (categoryName, canHaveSubcategories, courseID) VALUES ('Homepage', 1,".$courseID.");";
 $con2->query($sql);
 ?>
