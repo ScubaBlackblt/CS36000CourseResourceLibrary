@@ -1,5 +1,18 @@
 <!DOCTYPE html>
     <html lang="en">
+        <?php 
+        $host="localhost";
+        $port=3306;
+        $socket="";
+        $user="sqluser";
+        $password="password";
+        $dbname="courseresourcelibrary";
+
+        $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
+          or die ('Could not connect to the database server' . mysqli_connect_error());
+
+        //$con->close();
+        ?>
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta charset="UTF-8">
@@ -12,49 +25,35 @@
 <!-----------------------Class Name Block----------------------------------------------------------->
 <!----------------datbase will need to be linked in link below upon completion for full testing----------------------->
      <div class="top"> 
-            
-      <button class="editCourseName" oneclick="openForm()"></button>
+        
+      <button class="editCourseName" onclick="openForm()">
+        <div>
+          test
+        </div>
+      </button>
+      <script type="module" src = "DatabaseCode/InsertInfo.js"></script>
+      <script type = "text/javascript"></script>
             <div class ="form-popup" id="classForm">
-               <form className="classNameForm" action="" method="post">
+               <!-- <form className="classNameForm" action="" method="post"> -->
                 <input tye = "text" id="cName" class = "form-conrtol" placeholder = "Enter Class Name">
-                <button type ="submit">Submit</button>
+                <button type ="submit" onclick="">Submit</button>
 
-                </form>    
+                <!-- </form>     -->
             </div>
       </div>
 
-
       <script>
-
-          function openForm() {
-           document.getElementbyId("classForm").style.dysplay = "block";
+        function openForm() {
+          
+           document.getElementById("classForm").style.display = "block";
+           //alert("This alert box was called with the onload event");
           }
   
          function closeForm(){
-              document.getElementbyId("classForm").style.display = "none";
+              document.getElementById("classForm").style.display = "none";
              }
-
-         let cNameFormm = document.getElementById("classNameForm");
-  
-        cNameForm.addEventListener("submit", (e)=> {
-          e.preventDefault();
-                  
-             let cName = document.getElementById("cName");
-  
-                  if(cName.value == ""){
-                    alert("Please ensure the field is filled");
-                  }
-                  else{
-                    alert("Class Name Updated, page may need reloded for update");
-                  }
-                 ///document.getElementById("classNameFrom").style.display="none";
-                  //document.getElementById("cName").innerHTML = cName;
-  
-                });
-  
-                 
-         
-              </script>  
+      
+      </script>
    
 <!-------------------------------------------------------->
           
@@ -97,39 +96,14 @@
           }
 
           // Make an AJAX request to fetch the list of categories
-fetch('/categories')
-  .then(response => response.json())
-  .then(categories => {
-    // Create a list of clickable links for each category
-      const categoryList = document.getElementById('category-list');
-      categories.forEach(category => {
-      const categoryLink = document.createElement('a');
-      categoryLink.href = '#';
-      categoryLink.textContent = category.name;
-      categoryLink.addEventListener('click', () => {
-        // Make an AJAX request to fetch the data for the clicked category
-        fetch(`/data?category=${category.id}`)
-          .then(response => response.json())
-          .then(data => {
-            // Update the HTML on the page with the data
-            const dataContainer = document.createElement('div');
-            dataContainer.textContent = data;
-            document.body.appendChild(dataContainer);
-          });
-      });
-      const categoryItem = document.createElement('li');
-      categoryItem.appendChild(categoryLink);
-      categoryList.appendChild(categoryItem);
-    });
-  });
           const sidenav = document.getElementById('mySidenav');
           const addCatagoryButton = document.createElement('button');
           addCatagoryButton.textContent = '+';
           addCatagoryButton.id = 'add-Category';
-          addButton.classList.add('btn','btn')
+          addCatagoryButton.classList.add('btn','btn')
 
            // Add an event listener to the button
-          addCategoryButton.addEventListener('click', () => {
+          addCatagoryButton.addEventListener('click', () => {
           // Create a text field element
          const inputField = document.createElement('input');
          inputField.type = 'text';

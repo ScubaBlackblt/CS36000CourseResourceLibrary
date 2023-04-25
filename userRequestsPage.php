@@ -22,16 +22,19 @@
     <!----------------datbase will need to be linked in link below upon completion for full testing----------------------->
     <div class="top">
         <!--  <h1> <//?php echo $courseName; ?> </h1>-->
+        <button type = "button" id = "backToHome" style="position: absolute; top: 2%; left: 1%; padding: 10px;"><</button>
+        <div id="pageName" style="font-size: 2.5em;">Add Students to Course</div>
+        <script>
+        let backButton = document.getElementById("backToHome");
+        backButton.addEventListener('click', () => {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const courseID = urlParams.get('courseID');
+            const userID = urlParams.get('userID');
+            document.location.assign("http://localhost:3000/CS36000CourseResourceLibrary-main/homepage.php?pageID=homepage&courseID="+courseID+"&userID="+userID);
 
-        <button class="editCourseName" onclick="openForm()">+</button>
-        <div class="form-popup" id="classForm">
-            <form className="classNameForm" action="/insert" method="post">
-                <input type="text" id="cName" class="form-conrtol" name="courseName" placeholder="Enter Class Name">
-                <button type="submit">Submit</button>
-                <a href="javascript:void(0)" class="closebtn" onclick="closeForm()">&times;</a>
-
-            </form>
-        </div>
+        })
+</script>
     </div>
 
 

@@ -49,6 +49,3 @@ Login page
 		}
 	</script>
 </html>
-</body>
-
-</html>

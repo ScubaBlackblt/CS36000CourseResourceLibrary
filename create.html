@@ -5,7 +5,7 @@ Create Account page
 <html>
 
 <head>
-	<title>Login Page</title>
+	<title>Registration Page</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device width, 
 	intitial-scale=1" />
@@ -28,6 +28,13 @@ Create Account page
 			
 			<input name="confirm_password" id="confirm_password" type="password" required placeholder="Confirm Password" />
 			
+			<select name="teacher/student">
+				<option value="teacher">Teacher</option>
+				<option value="student">Student</option>
+			</select>
+
+			<input name="courseID" id="courseID" type="text" placeholder="Enter CourseID" />
+
 			<input value="Create Account" type="submit" onclick = "validatePassword()" />
 		</form>
 	</div>

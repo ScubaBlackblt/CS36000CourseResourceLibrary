@@ -40,6 +40,9 @@
  
 }
 
+#contentSection{
+  block-size: fit-content;
+}
 
 
 .sidenav {
@@ -64,18 +67,7 @@
   transition: 0.3s;
   
 }
-select{
-  appearance: none;
-  border: none;
-  background-color: none;
-  padding: 1rem;
-  width:12em;
-  height: 2.3em;
-  font-size: 1.48rem;
-  color: grey;
- box-shadow: 0 0.4rem #dfd9d9;
- background-color: #eee;
-}
+
 
 #addCatagories, #addStudent {
   /* position:absolute;
@@ -127,14 +119,14 @@ select{
   color: grey;
  } */
 
+ #pageName{
+  font-size: 2.5em;
+}
  .catagoriesPopup{
   display:none;
   border-color: #818181;
   border-width: 0.3rem;
-  margin-top: 16rem;
  }
-
-
 
 /* .addStudent{
   
@@ -177,14 +169,17 @@ select{
   height:fit-content;
   width: fit-content;
  }
- .trigger {
+ /* .trigger {
   position: absolute;
   bottom:0;
    
 
 
- }
+ } */
  
+ select { 
+  font-size: 0.9em;
+ }
  /*add content button css*/
  .modal {
   position: absolute;
@@ -328,4 +323,3 @@ select{
 text-align: center;
 padding: 100px;
 }
-/*end of button*/
