@@ -78,7 +78,7 @@ const container = document.getElementById("buttons-container");
 // }
 
 //<form action="homepage.php?courseID=' + courseID + '&userID=' + userID + '&pageID=' + pageID + '" method="post" >
-function addCategoriesToPage(categories) {
+function addCategoriesToPage(categories, isTeacher) {
     for (category of categories) {
         console.log(category);
         var pageID = category.categoryID;
@@ -86,9 +86,12 @@ function addCategoriesToPage(categories) {
         const urlParams = new URLSearchParams(queryString);
         const courseID = urlParams.get('courseID');
         const userID = urlParams.get('userID');
-        var div = document.createElement("li");
+        var div = document.createElement("div");
         div.innerHTML = '<div><label style = " display: block; margin: auto; margin-top: 20px; width: 50%;height: 50px; background-color: #eceef0; color: rgb(186, 184, 184); font-size: 20px; border: none; border-radius: 5px; text-align: center; cursor: pointer;" >' + category.categoryName + '</label></div>';
+        console.log("teacherVal: " + isTeacher);
+        if (isTeacher == true){
         addCategoryDeleteListener(div, pageID);
+        }
         addGoToCategoryListener(div, pageID);
         var requests = document.getElementById("buttons-container");
         requests.appendChild(div);
@@ -97,12 +100,14 @@ function addCategoriesToPage(categories) {
 
        //div.innerHTML = '<form method="post" id="submission-form" onsubmit ="return submitForm()"><input type="file" id="selected-submission" name="content"></input><input type="submit" name="submit-submission" onclick="return confirm('+"Are you sure you want to submit this file?"+')"></form>'
 
-function addSubmissionArea(moduleID){
+function addSubmissionArea(moduleID, isTeacher){
     var div = document.createElement("div");
         console.log(div);
         //div.innerHTML = "test";
         div.innerHTML = '<form method="post" id="submission-form" onsubmit ="return submitForm()"><input type="file" id="selected-submission" name="content"></input><input type="submit" name="submit-submission" onclick="return confirm('+"Are you sure you want to submit this file?"+')"></form>';
+        if (isTeacher){
         addModuleDeleteListener(div, moduleID);
+        }
         console.log("test running");
         const contentSection = document.getElementById("contentSection");
         contentSection.appendChild(div);
@@ -157,11 +162,13 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
         const courseID = urlParams.get('courseID');
         const userID = urlParams.get('userID');
         const pageID = urlParams.get('pageID');
-
+        var isTeacher = false;
         if (courseData.teacherID != userID) {
             hideTeacherButtons();
         }
         else{
+            console.log("isTeacher");
+            isTeacher = true;
             addBackButtonListener();
             addAddStudentButtonListener();
         }
@@ -250,11 +257,11 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
         //     }
         // }
 
-        function submitPhoto(nameOfPhoto, moduleID) {
+        function submitPhoto(nameOfPhoto, moduleID, isTeacher) {
             var imgURL = nameOfPhoto;
             let generatedImg = document.createElement("img");
             generatedImg.src = imgURL;
-            addToList(generatedImg, moduleID);
+            addToList(generatedImg, moduleID, isTeacher);
         }
 
         fileButton.addEventListener('click', () => {
@@ -303,12 +310,14 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
                 modal.classList.toggle("show-modal");
             }
         }
-        function addToList(child, moduleID) {
+        function addToList(child, moduleID, isTeacher) {
             console.log("got here");
             const list = document.createElement("li");
             list.style.listStyle = "none"
             console.log("moduleID: "+moduleID+" child: "+child);
+            if (isTeacher){
             addModuleDeleteListener(list, moduleID);
+            }
             list.appendChild(child);
             const contentSection = document.getElementById("contentSection");
             contentSection.appendChild(list);
@@ -328,27 +337,28 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
             var moduleID = contents[i].moduleID;
             var contentType = contents[i].contentType;
             var textEntered = contents[i].textEntered;
+            console.log("teachval1" + isTeacher);
             switch (contentType) {
                 case "text":
                     let insertTextInput = document.createTextNode(textEntered);
-                    addToList(insertTextInput,moduleID);
+                    addToList(insertTextInput,moduleID, isTeacher);
                     break;
                 case "textbox":
                     let insertTextBox = document.createTextNode(textEntered);
-                    addToList(insertTextBox,moduleID);
+                    addToList(insertTextBox,moduleID, isTeacher);
                     break;
                 case "image":
-                    submitPhoto(textEntered, moduleID);
+                    submitPhoto(textEntered, moduleID, isTeacher);
                     break;
                 case "file":
                     let testfile = document.createTextNode(textEntered);
-                    addToList(testfile,moduleID);
+                    addToList(testfile,moduleID, isTeacher);
                     break;
                 case "submission":
                     console.log("testsub");
                     let submissionFile = document.createTextNode(textEntered);
                     //addSubmission(submissionFile,moduleID);
-                    addSubmissionArea(moduleID);
+                    addSubmissionArea(moduleID, isTeacher);
                     break;
                 default:
                     break;
@@ -364,7 +374,7 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
                 return -1;
             }
         }
-        addCategoriesToPage(subcategories);
+        addCategoriesToPage(subcategories, isTeacher);
     })
     .catch((error) => {
         // This is where you handle errors.

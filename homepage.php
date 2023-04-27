@@ -115,7 +115,6 @@
                 <input name="contentType" value="image" style="visibility: hidden">
             </form>
             <form method="post" id="submission-form">
-                <input type="file" id="selected-submission" name="content"></input>
                 <input type="submit" name="submit-submission"></input>
                 <input name="contentType" value="submission" style="visibility: hidden">
             </form>
