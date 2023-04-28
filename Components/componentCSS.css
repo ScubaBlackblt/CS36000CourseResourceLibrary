@@ -1,3 +1,6 @@
+/*Component styling done by Megan Hacha*/
+
+/*Styling of modal*/
 .modal {
   position: absolute;
   left: 20%;
@@ -13,13 +16,14 @@
   padding: 100px 100px 100px 100px;
 }
 
-
+/*Styling on button that toggles the modal*/
 .trigger {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
+/*Styling on the close button in the modal*/
 .close-button {
   position: absolute;
   top: 0;
@@ -37,6 +41,7 @@
   background-color: darkgray;
 }
 
+/*Styling used to toggle the modal being visible or no
 .show-modal {
   opacity: 1;
   visibility: visible;
@@ -44,6 +49,7 @@
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
+/*Styling for the button that allows image submitting*/
 .add-image {
   margin-left: 50px;
   margin-right: 50px;
@@ -60,6 +66,7 @@
   background-color: powderBlue;
 }
 
+/*Styling for the button that allows file submitting*/
 .add-file {
   margin-right: 50px;
   background-image: url('https://cdn.onlinewebfonts.com/svg/img_520494.png');
@@ -76,16 +83,19 @@
 
 }
 
+/*Styling for the file chooser that shows up upon selection of file button*/
 .selected-file {
   padding: 20px;
 }
 
+/*Styling for the submit button for the file submission*/
 .submit-file {
   background-color: lightgray;
   border-radius: 0.25rem;
   visibility: hidden;
 }
 
+/*Styling for the button that allows the user to input text*/
 .add-text {
   margin-right: 50px;
   background-image: url('https://cdn3.iconfinder.com/data/icons/symbol-black-common-2/32/text-add-512.png');
@@ -97,6 +107,7 @@
   line-height: 180px;
 }
 
+/*Styling for the text box that appears when text button is pressed*/
 .text-input {
 
   margin-left: 50px;
@@ -104,6 +115,7 @@
   visibility: hidden;
 }
 
+/*Styling for the submit button for the text inputted*/
 .submit-text {
   visibility: hidden;
   margin-left: 50px;
@@ -121,6 +133,7 @@
   background-color: powderBlue;
 }
 
+/*Styling for the button that allows the user to submit an assignment*/
 .add-submission {
   margin-right: 50px;
   background-image: url('https://csci1210.com/images/assignment.png');
@@ -136,16 +149,13 @@
   background-color: powderBlue;
 }
 
+/*Styling for the div that the individual modules show up in*/
 .list-div {
   text-align: center;
   padding: 100px;
 }
 
-.submission-list {
-  text-align: center;
-  padding: 100px;
-}
-
+/*Styling for the list of modules themselves*/
 li {
   margin-top: 5px;
   padding: 10px;
@@ -154,7 +164,7 @@ li {
   box-shadow: 0 0 8px 5px #0ff;
 }
 
-
+/*Styling for images that keeps them at a certain size*/
 img {
   max-width: 100%;
   max-height: 100%;
