@@ -4,6 +4,7 @@
 //Returns to page user is on
 //Inputs: username, password, passwordRepeat, courseID, typeOfAccount
 //Outputs: None
+//Made by: Alex Kitani
 
 //Open new connection
 include 'connect.php';
