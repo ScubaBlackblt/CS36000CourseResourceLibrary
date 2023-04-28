@@ -1,7 +1,7 @@
 # CS36000CourseResourceLibrary
 
 
-# Things to do to deploy:
+# Things to do to deploy
 1. Install Drivers to run PHP
 2. Setpup VS Code to run PHP
 3. Install MySQL Server
