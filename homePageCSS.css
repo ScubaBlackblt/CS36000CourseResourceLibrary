@@ -1,62 +1,29 @@
+/* Home Page CSS done by Halie Andrews */
+/*Styling on top div where pagename is displayed*/
 .top {
-  /*background-image: url("/banner.jpg");*/
   background: linear-gradient(45deg, #ff9a9e, #fad0c4);
     width: 100%;
     height: 120px;
-   
     text-align: center;
-    
-
 }
-.editCourseName {
-  position: absolute;
-  top: 35px;
-  right: 300px;
-  background-color: #C0C0C0;
-  opacity: 0.4;
+/*Styling on the page name*/
+#pageName{
+  font-size: 2.5em;
 }
-.editCourseName:active {
-  color: white;
-  box-shadow: 0 0.2rem #dfd9d9;
-  transform: translateY(0.2rem);
- }
-.form-popup {
-  display: none;
-  position: absolute;
-  top: 4rem;
-  right: 4rem;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-  border-width: 0em;
-} 
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color:#bcb4b4;
-}
-.main{
-  height: 550px;
-  width: 80%;
- 
-}
-
-#contentSection{
-  block-size: fit-content;
-}
-
-
+/*styling on side navigation*/
 .sidenav {
   height: 100%; 
-  width: 0; /* 0 width - change this with JavaScript */
+  width: 0; 
   float: right;
-  position: fixed; /* Stay in place */
+  position: fixed; 
   z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+  top: 0; 
   right: 0;
-  background-color: #FFFFFF; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background-color: #FFFFFF; 
+  overflow-x: hidden; 
+  padding-top: 60px; 
+  transition: 0.5s; 
+/*styling when side navigation is open*/
 }
 .sidenav a {
   padding: 8px 8px 8px 32px;
@@ -67,8 +34,16 @@
   transition: 0.3s;
   
 }
-
-
+/* subcatagory selection styling */
+select { 
+  font-size: 0.9em;
+ }
+/*styling on page name display*/
+#pageName{
+  font-size: 2.5em;
+}
+/*styling on side navigation student and add catagories buttons. */
+/*catagory buttons use the same styling but since they are dynamically created elements they are styled in the javascript file*/
 #addCatagories, #addStudent {
   /* position:absolute;
   bottom: 260px; */
@@ -84,242 +59,31 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+/* changes color of buttons when hoverd over */
 #addCatagories:hover, #addStudent:hover {
   background-color: #d8e5ee;
 }
 
-/* .addCatagories {
-  position: absolute;
-  right: 300px;
-  top: 100px;
-  background-color: #eee;
-  border: none;
-  font-size: 1rem;
-  border-radius: 1rem;
-  color: rgb(59, 49, 49);
-  box-shadow: 0 0.4rem #dfd9d9;
-  cursor: pointer;
- } */
- 
- /* .addCatagories:active {
-  color: white;
-  box-shadow: 0 0.2rem #dfd9d9;
-  transform: translateY(0.2rem);
- }
- 
- .addCatagories:hover:not(:disabled) {
-  background: lightcoral;
-  color: white;
-  text-shadow: 0 0.1rem #bcb4b4;
- }
- 
- .addCatagories:disabled {
-  cursor: auto;
-  color: grey;
- } */
-
- #pageName{
-  font-size: 2.5em;
-}
+/*styling on the add catagories popup*/
  .catagoriesPopup{
   display:none;
   border-color: #818181;
   border-width: 0.3rem;
  }
 
-/* .addStudent{
-  
-    background-color: #eee;
-    border: none;
-    padding: 1rem;
-    padding-bottom: 3em;
-    font-size: 1rem;
-    width: 10em;
-    bottom: 0.0;
-    color: lightcoral;
-    box-shadow: 0 0.4rem #dfd9d9;
-    cursor: pointer;
-    position: fixed;
-   } */
-   
-   /* .addStudent:active {
-    color: white;
-    box-shadow: 0 0.2rem #dfd9d9;
-    transform: translateY(0.2rem);
-   }
-   
-   .addStudent:hover:not(:disabled) {
-    background: lightcoral;
-    color: white;
-    text-shadow: 0 0.1rem #bcb4b4;
-   }
-   
-   .addStudent:disabled {
-    cursor: auto;
-    color: grey;
-   } */
+/*styling on main div of page where content containers are stored*/
 .main {
     height: 550px;
     width: 80%;
     position: relative;
     text-align: center;
  }
+/*styling on content containers*/
  .contentContainer{
   height:fit-content;
   width: fit-content;
  }
- /* .trigger {
-  position: absolute;
-  bottom:0;
-   
 
 
- } */
- 
- select { 
-  font-size: 0.9em;
- }
- /*add content button css*/
- .modal {
-  position: absolute;
-  left: 20%;
-  top: 20%;
-  width: 700px;
-  height: 200px;
-  background-color: rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(1.1);
-  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-  vertical-align: middle;
-  padding: 100px 100px 100px 100px;
-}
-
-.trigger {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.close-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  float: right;
-  width: 1.5rem;
-  line-height: 1.5rem;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 0.25rem;
-  background-color: lightgray;
-}
-
-.close-button:hover {
-  background-color: darkgray;
-}
-
-.show-modal {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1.0);
-  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-}
-
-.add-image {
-  margin-left: 50px;
-  margin-right: 50px;
-  background-image: url('https://cdn.onlinewebfonts.com/svg/img_520029.png');
-  background-size: 85%;
-  background-repeat: no-repeat;
-  width: 100px;
-  height: 100px;
-  border-radius: 0.25rem;
-  line-height: 180px;
-}
-
-.add-image:hover {
-  background-color: powderBlue;
-}
 
 
-.add-file {
-  margin-right: 50px;
-  background-image: url('https://cdn.onlinewebfonts.com/svg/img_520494.png');
-  background-size: 80%;
-  background-repeat: no-repeat;
-  border-radius: 0.25rem;
-  width: 100px;
-  height: 100px;
-  line-height: 180px;
-}
-
-.add-file:hover {
-  background-color: powderBlue;
-
-}
-
-.selected-file {
-  padding: 20px;
-}
-
-.submit-file{
-  background-color: lightgray;
-  border-radius: 0.25rem;
-  visibility: hidden;
-}
-
-.add-text {
-  margin-right: 50px;
-  background-image: url('https://cdn3.iconfinder.com/data/icons/symbol-black-common-2/32/text-add-512.png');
-  background-size: 85%;
-  background-repeat: no-repeat;
-  border-radius: 0.25rem;
-  width: 100px;
-  height: 100px;
-  line-height: 180px;
-}
-
-.text-input {
-  
-  margin-left: 50px;
-  margin-top: 20px;
-  visibility: hidden;
-}
-
-.submit-text {
-  visibility: hidden;
-  margin-left: 50px;
-  background-color: lightgray;
-  border-radius: 0.25rem;
-  width: 100px;
-  height: 50;
-}
-
-.submit-text:hover {
-  background-color: darkgray;
-}
-
-.add-text:hover {
-  background-color: powderBlue;
-}
-
-.add-submission {
-  margin-right: 50px;
-  background-image: url('https://csci1210.com/images/assignment.png');
-  background-size: 80%;
-  background-repeat: no-repeat;
-  border-radius: 0.25rem;
-  width: 100px;
-  height: 100px;
-  line-height: 180px;
-}
-
-.add-submission:hover {
-  background-color: powderBlue;
-}
-
-.list-div {
-text-align: center;
-padding: 100px;
-}

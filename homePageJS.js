@@ -1,83 +1,41 @@
-function openForm() {
-    document.getElementById("classForm").style.display = "block"
-}
-function closeForm() {
-    document.getElementById("classForm").style.display = "none"
-}
-
-// let cNameForm = document.getElementById("classForm");
-// console.log(cNameForm);
-// cNameForm.addEventListener("submit", (e) => {
-//     e.preventDefault()
-//     let cName = document.getElementById("cName");
-//     if (cName.value == "") {
-//         alert("Please ensure the field is filled")
-//     }
-//     else {
-//         alert("Class Name Updated, page may need reloded for update")
-//     }
-//     ///document.getElementById("classNameFrom").style.display="none";
-//     //document.getElementById("cName").innerHTML = cName;
-
-// });
+//  The following document comprises the home page javascript functions
+// Components done by Megan Hacha
+// Catagories/page creation done by Halie Andrews
+//database integration/insertaion and deletion aid by Alec Goodrich
+ 
 
 
-//side navigation js
+
+//opens side navigation
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("pageSidenav").style.width = "250px";
 }
-
+//closes side navigation
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("pageSidenav").style.width = "0";
 }
 
-//catagory popup js
+
+//opens the form to add a catagory
 function openCatPopup() {
     document.getElementById("catPopup").style.display = "block";
     document.getElementById("addCatagories").style.display = "none";
 }
+//closes the form to add a catagory
 function closeCatPopup() {
     document.getElementById("catPopup").style.display = "none";
     document.getElementById("addCatagories").style.display = "block";
 
 }
-//catagory list js
+//contaner for storing catagories created, as its a dynamically created element a container is needed to store them
 const container = document.getElementById("buttons-container");
 
-// Loop through the buttons data and generate HTML code for each button
-// for (const button of buttons) {
-// const name = button.name;
-// const categoryID = button.category_id;
-// const buttonElement = document.createElement("button");
-// buttonElement.textContent = name;
 
-// // Add an event listener to the button that reloads the page with the content of the corresponding category
-// buttonElement.addEventListener("click", () => {
-// window.location.href = `getPageData.php?category_id=${categoryID}`;
-// });
 
-// // Add the button to the container element
-// container.appendChild(buttonElement);
-// }
+//creates the catagory buttons
+//inputs: catagoryName, userId
+//outputs: catagory button with the name of the catagory
 
-// function addCategoriesToPage(categories) {
-//     for (category of categories) {
-//         console.log(category);
-//         var pageID = category.categoryID;
-//         const queryString = window.location.search;
-//         const urlParams = new URLSearchParams(queryString);
-//         const courseID = urlParams.get('courseID');
-//         const userID = urlParams.get('userID');
-//         var div = document.createElement("div");
-//         var div = document.createElement("div");
-//         div.innerHTML = '<form action="homepage.php?courseID=' + courseID + '&userID=' + userID + '&pageID=' + pageID + '" method="post" ><label>' + category.categoryName + '</label><input type="submit">Go to </input></form>';
-//         addCategoryDeleteListener(div, pageID);
-//         var requests = document.getElementById("buttons-container");
-//         requests.appendChild(div);
-//     }
-// }
-
-//<form action="homepage.php?courseID=' + courseID + '&userID=' + userID + '&pageID=' + pageID + '" method="post" >
 function addCategoriesToPage(categories, isTeacher) {
     for (category of categories) {
         console.log(category);
@@ -98,12 +56,12 @@ function addCategoriesToPage(categories, isTeacher) {
     }
 }
 
-       //div.innerHTML = '<form method="post" id="submission-form" onsubmit ="return submitForm()"><input type="file" id="selected-submission" name="content"></input><input type="submit" name="submit-submission" onclick="return confirm('+"Are you sure you want to submit this file?"+')"></form>'
 
+
+//creates a file submision form
 function addSubmissionArea(moduleID, isTeacher){
     var div = document.createElement("div");
         console.log(div);
-        //div.innerHTML = "test";
         div.innerHTML = '<form method="post" id="submission-form" onsubmit ="return submitForm()"><input type="file" id="selected-submission" name="content"></input><input type="submit" name="submit-submission" onclick="return confirm('+"Are you sure you want to submit this file?"+')"></form>';
         if (isTeacher){
         addModuleDeleteListener(div, moduleID);
@@ -111,33 +69,38 @@ function addSubmissionArea(moduleID, isTeacher){
         console.log("test running");
         const contentSection = document.getElementById("contentSection");
         contentSection.appendChild(div);
-        //addToList(div, moduleID);
         console.log("test running2");
 }
 
-//categoryForm
+//searching and saving url parameters
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const pageID = urlParams.get('pageID');
 const courseID = urlParams.get('courseID');
 const userID = urlParams.get('userID');
 var categoryForm = document.getElementById("categoryForm");
+//submiting component fields to database
 var t = document.getElementById("text-form");
-t.action = "DatabaseCode/addModuleToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
+t.action = "addModuleToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
 var f = document.getElementById("file-form");
-f.action = "DatabaseCode/addModuleToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
+f.action = "addModuleToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
 var p = document.getElementById("photo-form");
-p.action = "DatabaseCode/addModuleToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
+p.action = "addModuleToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
 var s = document.getElementById("submission-form");
-s.action = "DatabaseCode/addModuleToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
-categoryForm.action = "DatabaseCode/addCategoryToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
+s.action = "addModuleToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
+//inserts catagory names into the database
+categoryForm.action = "addCategoryToDatabase.php?courseID=" + courseID + "&userID=" + userID + "&pageID=" + pageID;
 addBackButtonListener();
 addAddStudentButtonListener();
+
+
+//hides the back navigation button when user is on the home page
 if (pageID=="homepage"){
     document.getElementById("backToHome").style.visibility = 'hidden';
 }
 
-fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
+//getting the page data from the database
+fetch("getPageData.php?pageID=" + pageID +"&courseID="+courseID)
     .then((response) => {
         if (!response.ok) {
             console.log("fail");
@@ -146,7 +109,8 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
         return response.json(); // Parse the JSON data.
     })
     .then((data) => {
-        // This is where you handle what to do with the response.
+        // This is where you handle what to do with the response. ie storing it in a variable 
+        //the database respose is sent as an array that holds arrays each field 
         console.log(data);
         var pageData = data;
         var courseData = data[0];
@@ -156,13 +120,14 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
         var submissions = data[4];
 
 
-
+        //Searching and saving URL parameters
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const courseID = urlParams.get('courseID');
         const userID = urlParams.get('userID');
         const pageID = urlParams.get('pageID');
         var isTeacher = false;
+        //hides the teacher buttons if the user is not a teacher
         if (courseData.teacherID != userID) {
             hideTeacherButtons();
         }
@@ -176,17 +141,11 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
         if (pageData.canHaveSubcategories != 1){
             document.getElementById("addCatagories").style.visibility = 'hidden';
         }
-
-
-
+//when redirected to a catagory page, replace course name display with catagory name display at the top of the page
         document.getElementById("pageName").innerHTML = pageData.categoryName;
 
-        // put page load code here like calling loadPage(data); and putting above declarations at start of function
-        var imageCounter = 0;
-        var fileCounter = 0;
-        var textBoxCounter = 0;
-        var submissionCounter = 0;
-        var currentlySelected = "none";
+       
+        
         var contentID = "none";
         var moduleID = "none";
         var contentType = "none";
@@ -225,6 +184,7 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
             photoSubmitForm.style.visibility = 'hidden';
             submissionSubmitForm.style.visibility = 'hidden';
         })
+        //Clicking the trigger toggles the modal, but this allows clicking anything other than the modal to toggle it as well.
         window.addEventListener('click', () => {
             if (event.target === modal) {
                 modal.classList.toggle("show-modal");
@@ -241,22 +201,9 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
             submissionSubmitForm.style.visibility = 'hidden';
             currentlySelected = "image";
         })
-        // function submitPhoto() {
-        //     if (verifyImage(selectedPhoto.files[0]) == 1) {
-        //         modal.classList.toggle("show-modal");
-        //         var img = selectedPhoto.files[0];
-        //         var imgReader = new FileReader();
-        //         imgReader.onload = function (e) {
-        //             var showImage = document.createElement("img");
-        //             showImage.src = e.target.result;
-        //             contentType = "image";
-        //             textEntered = "none";
-        //             addToList(showImage);
-        //         }
-        //         imgReader.readAsDataURL(img);
-        //     }
-        // }
 
+        /*Because we didn't get file uploading done, this method works to get the file NAME from the database, and then
+        upload it locally from the user computer via the given image file name */
         function submitPhoto(nameOfPhoto, moduleID, isTeacher) {
             var imgURL = nameOfPhoto;
             let generatedImg = document.createElement("img");
@@ -271,17 +218,6 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
             submissionSubmitForm.style.visibility = 'hidden';
             currentlySelected = "file";
         })
-        function submitFile() {
-            var file = selectedFile.files[0].name;
-            let fileNameInput = document.createTextNode(file);
-            modal.classList.toggle("show-modal");
-            fileCounter++;
-            contentID = fileCounter;
-            moduleID = "file";
-            contentType = "file";
-            textEntered = "none";
-            //addToList(fileNameInput);
-        }
         textButton.addEventListener('click', () => {
             textSubmitForm.style.visibility = 'visible';
             fileSubmitForm.style.visibility = 'hidden';
@@ -296,20 +232,8 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
             submissionSubmitForm.style.visibility = 'visible';
             currentlySelected = "submission";
         })
-        function submitSubmissionFile() {
-            var chosenFile = selectedFile.files[0].name;
-            const response = confirm("Is this the file you would like to submit?");
-            if (response) {
-                //This is where it will be sent to the database.
-                submissionCounter++;
-                contentID = submissionCounter;
-                moduleID = "sub";
-                contentType = "submission";
-                textEntered = "none";
-                alert("Your assignment was submitted!");
-                modal.classList.toggle("show-modal");
-            }
-        }
+
+        //Adds the module obtained from database to the list of items to be viewed on the page.
         function addToList(child, moduleID, isTeacher) {
             console.log("got here");
             const list = document.createElement("li");
@@ -322,17 +246,10 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
             const contentSection = document.getElementById("contentSection");
             contentSection.appendChild(list);
         }
-        // for (var i = 0; i < contents.length; i++) {
-        //     //Data order: contentID, moduleID, contentType, textEntered;
-        //     var contentID = contents[i].contentID;
-        //     var moduleID = contents[i].moduleID;
-        //     var contentType = contents[i].contentType;
-        //     var textEntered = contents[i].textEntered;
-        //     let insertTextInput = document.createTextNode(textEntered);
-        //     addToList(insertTextInput, moduleID);
-        // }
+
         for (var i = 0; i < contents.length; i++) {
-            //Data order: contentID, moduleID, contentType, textEntered;
+            //Go through entire list of contents to show all modules on the page
+            //Data order: contentID, moduleID, contentType, textEntered
             var contentID = contents[i].contentID;
             var moduleID = contents[i].moduleID;
             var contentType = contents[i].contentType;
@@ -364,28 +281,18 @@ fetch("DatabaseCode/getPageData.php?pageID=" + pageID)
                     break;
             }
         }
-        function verifyImage(file) {
-            let filename = file.name;
-            const fileExt = filename.split('.').pop();
-            if (fileExt == "jpg" || fileExt == "png") {
-                return 1;
-            } else {
-                alert("Please select a valid photo type (.jpg or .png)");
-                return -1;
-            }
-        }
         addCategoriesToPage(subcategories, isTeacher);
     })
     .catch((error) => {
-        // This is where you handle errors.
+        console.error('fetch could not be completed:', error);
     });
 
+    //deletes module from page and database
 function addModuleDeleteListener(module, moduleID) {
     module.addEventListener('contextmenu', function (ev) {
         ev.preventDefault();
         var answer = confirm("Delete Module?")
         if (answer) {
-            //alert("confirm");
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const courseID = urlParams.get('courseID');
@@ -395,17 +302,18 @@ function addModuleDeleteListener(module, moduleID) {
 
         }
         else {
-            //alert("decline");
+           
         }
         return false;
     }, false);
 }
+//deletes category from page and database
 function addCategoryDeleteListener(category, categoryID) {
     category.addEventListener('contextmenu', function (ev) {
         ev.preventDefault();
         var answer = confirm("Delete Category?");
         if (answer) {
-            //alert("confirm");
+            
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const courseID = urlParams.get('courseID');
@@ -415,12 +323,14 @@ function addCategoryDeleteListener(category, categoryID) {
 
         }
         else {
-            //alert("decline");
+            
         }
         return false;
     }, false);
 }
-
+//redirects to category page
+//inputs: category button, category ID
+//outputs: catagoryId, courseID, userID
 function addGoToCategoryListener(category, categoryID) {
     category.addEventListener('click', function (ev) {
         const queryString = window.location.search;
@@ -431,6 +341,7 @@ function addGoToCategoryListener(category, categoryID) {
         document.location.assign("http://localhost:3000/CS36000CourseResourceLibrary-main/homepage.php?pageID=" + categoryID + "&courseID=" + courseID + "&userID=" + userID + "&categoryID=" + categoryID);
     }, false);
 }
+//redirects to parent page from subpages, either from catagory page to homepage or subcategory page to parent catagory page 
 function addBackButtonListener() {
     let backButton = document.getElementById("backToHome");
     backButton.addEventListener('click', () => {
@@ -443,7 +354,7 @@ function addBackButtonListener() {
     })
 
 }
-
+//redirects to student admission request page
 function addAddStudentButtonListener() {
     let addStudentButton = document.getElementById("addStudent");
     addStudentButton.addEventListener('click', () => {
@@ -455,7 +366,7 @@ function addAddStudentButtonListener() {
 
     })
 }
-
+//hides teacher buttons from student view
 function hideTeacherButtons() {
     let addStudentButton = document.getElementById("addStudent");
     let addModuleButton = document.getElementById("addModule");
@@ -464,25 +375,3 @@ function hideTeacherButtons() {
     addModuleButton.style.visibility = 'hidden';
     addCategoryButton.style.visibility = 'hidden';
 }
-
-
-//    function showCatagory(catagory_id){
-//     var retriv = new XMLHttpRequest();
-//     xhr.open("GET", "getPageData.php?id=" + id, true);
-//      retriv.onload = function() {
-//   if (retriv.status === 200) {
-//     // Update content area with retrieved content
-//     var contentArea = document.getElementById("content-area");
-//     contentArea.innerHTML = retriv.responseText;
-//   }
-// };
-// retriv.send();
-//    }
-//    var catagory_list = document.getElementById("item-list");
-//    catagory_list.addEventListener("click", function(e) {
-//      if (e.target && e.target.nodeName === "LI") {
-//        // Get selected item and show content
-//        var id = e.target.id;
-//        showItem(id);
-//      }
-//    });
