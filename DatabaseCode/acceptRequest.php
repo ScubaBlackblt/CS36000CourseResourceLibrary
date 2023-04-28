@@ -5,6 +5,7 @@
 //Returns to page user is on
 //Inputs: userID and courseID
 //Outputs: none
+//Made by: Alex Kitani
 
 //Open new connection
 include 'connect.php';
