@@ -4,6 +4,7 @@
 //Returns to current page or goes to homepage
 //Inputs: username, password
 //Outputs: None
+//Made by: Alex Kitani
 
 //Open new connection
 include 'connect.php';
