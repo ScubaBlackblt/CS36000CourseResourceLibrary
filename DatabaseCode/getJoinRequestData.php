@@ -4,6 +4,7 @@
 //Returns none
 //Inputs: courseID
 //Outputs: requestArray
+//Made by: Alex Kitani
 
 //Open new connection
 include 'connect.php';
