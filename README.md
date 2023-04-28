@@ -16,7 +16,7 @@
 
 
 # 1) Installing Drivers to run PHP
-Install xampp if you do not alread have it. Download here: https://sourceforge.net/projects/xampp/
+Install xampp if you do not alread have it. Download here: https://sourceforge.net/projects/xampp/ 
 Open up you computer's enviromental variables (type enviromental variables into computer search open and click enviromental variables)
 Under system varibales select "Path" and then edit. Click new and and teh path to when the PHP folder in XAMPP is (Default path is C:\xampp\php)
 Then click okay.
