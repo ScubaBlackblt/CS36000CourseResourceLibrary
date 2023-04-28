@@ -1,9 +1,14 @@
+-- Resets all tables to their base states
+-- Inputs: n/a
+-- Outputs: n/a
+-- By: Alec Goodrich
+-- Date Last Modified: 4/28/2023
+
+
+-- Drop all of the tables to purge database
 DROP TABLE Module;
 
-
 DROP TABLE Content;
-
-
 
 DROP TABLE Submissions;
 
@@ -17,6 +22,8 @@ DROP TABLE joinrequesttable;
 
 DROP TABLE studentsjoined;
 
+
+-- Recreate all of the tables
 CREATE TABLE Module (
     moduleID int AUTO_INCREMENT PRIMARY KEY,
     categoryID int
@@ -29,23 +36,12 @@ CREATE TABLE Content (
     textEntered varchar(500)
 );
 
-
-
-
-
-
-
-
 CREATE TABLE Submissions (
     submissionID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     contentID int,
     submitterID int NOT NULL,
     submittedFile varchar(500) NOT NULL
 );
-
-
-
-
 
 CREATE TABLE Category (
     categoryID int AUTO_INCREMENT PRIMARY KEY,

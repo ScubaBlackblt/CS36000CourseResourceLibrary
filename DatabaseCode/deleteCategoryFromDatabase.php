@@ -1,11 +1,25 @@
 <?php
+// Deleted a category to the database. Gets data passed in through the URL. 
+// Returns to page the user was on.
+// Inputs: categoryID, pageID, userID, courseID
+// Outputs: none
+// By: Alec Goodrich
+// Date Last Modified: 4/28/2023
+
+// Create new connection
 include 'connect.php';
+
+// Get values from URL
 $categoryID = $_GET['categoryID'];
 $pageID = $_GET['pageID'];
 $userID = $_GET['userID'];
 $courseID = $_GET['courseID'];
+
+// Delete module from database
 $sql = "DELETE FROM category WHERE categoryID=$categoryID";
 $con->query($sql);
 $con->close();
+
+// Go back to page user was on 
 header("Location: http://localhost:3000/CS36000CourseResourceLibrary-main/homepage.php?userID=$userID&courseID=$courseID&pageID=$pageID");
 ?>

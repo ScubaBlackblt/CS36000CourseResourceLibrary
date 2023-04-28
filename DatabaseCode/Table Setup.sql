@@ -1,3 +1,9 @@
+-- Creates all of the tables for the database
+-- Inputs: n/a
+-- Outputs: n/a
+-- By: Alec Goodrich
+-- Date Last Modified: 4/28/2023
+
 CREATE TABLE Module (
     moduleID int AUTO_INCREMENT PRIMARY KEY,
     categoryID int
