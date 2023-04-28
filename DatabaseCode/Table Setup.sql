@@ -1,7 +1,7 @@
 -- Creates all of the tables for the database
 -- Inputs: n/a
 -- Outputs: n/a
--- By: Alec Goodrich
+-- By: Alec Goodrich & Alex Kitani
 -- Date Last Modified: 4/28/2023
 
 CREATE TABLE Module (
