@@ -1,5 +1,9 @@
-<!--
-Login page
+<!-- The loginPage gives an option to enter username and password. Clicking the submit button will validate the login and password with the database. 
+Clicking on the Create Account button will navigate the user to the Registration page.
+Inputs: username and password
+Outputs: n/a
+By: Prasanna Suresh
+Date Last Modified: 4/28/2023
 -->
 <!DOCTYPE html>
 <html>
